@@ -42,8 +42,8 @@ jobs:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           JEKYLL_ENV: production
         run: |
-          ruby -rjson -e 'File.write(ARGV[0], JSON.generate({url: ENV.fetch("PAGES_ORIGIN"), baseurl: ENV.fetch("PAGES_BASE_PATH")}))' "$RUNNER_TEMP/pages.json"
-          bundle exec jekyll build --config "_config.yml,$RUNNER_TEMP/pages.json"
+          ruby -ryaml -e 'File.write(ARGV[0], {"url" => ENV.fetch("PAGES_ORIGIN"), "baseurl" => ENV.fetch("PAGES_BASE_PATH")}.to_yaml)' "$RUNNER_TEMP/pages.yml"
+          bundle exec jekyll build --config "_config.yml,$RUNNER_TEMP/pages.yml"
           python3 scripts/check_site.py _site --baseurl "$PAGES_BASE_PATH"
       - uses: actions/upload-pages-artifact@v4
         with:
