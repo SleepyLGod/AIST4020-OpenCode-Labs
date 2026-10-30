@@ -1,0 +1,17 @@
+{
+  "name": "reading-list-lab-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "browser:install": "PLAYWRIGHT_BROWSERS_PATH=\"$PWD/.cache/browsers\" playwright install chromium",
+    "browser": "PLAYWRIGHT_BROWSERS_PATH=\"$PWD/.cache/browsers\" XDG_CACHE_HOME=\"$PWD/.cache\" playwright-cli"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/cli": "0.1.22"
+  }
+}

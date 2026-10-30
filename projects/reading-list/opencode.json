@@ -1,0 +1,183 @@
+{
+  "model": "nvidia/z-ai/glm-5.3-flash",
+  "update": "disable",
+  "share": "disabled",
+  "providers": {
+    "deepseek": {
+      "env": [
+        "DEEPSEEK_API_KEY"
+      ],
+      "settings": {
+        "baseURL": "https://api.deepseek.com/v1"
+      },
+      "models": {
+        "deepseek-flash": {
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          },
+          "body": {
+            "thinking": {
+              "type": "disabled"
+            },
+            "max_tokens": 4096
+          },
+          "capabilities": {
+            "tools": true
+          }
+        }
+      }
+    },
+    "nvidia": {
+      "env": [
+        "NVIDIA_API_KEY"
+      ],
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://integrate.api.nvidia.com/v1"
+      },
+      "models": {
+        "z-ai/glm-5.3-flash": {
+          "modelID": "z-ai/glm-5.3-flash",
+          "name": "GLM-5.3-Flash (NVIDIA)",
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          },
+          "body": {
+            "reasoning_effort": "low",
+            "max_tokens": 4096
+          },
+          "capabilities": {
+            "tools": true
+          }
+        }
+      }
+    }
+  },
+  "agents": {
+    "build": {
+      "steps": 32
+    },
+    "plan": {
+      "steps": 8
+    }
+  },
+  "permissions": [
+    {
+      "action": "*",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "*.env*",
+      "effect": "deny"
+    },
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "glob",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "grep",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "skill",
+      "resource": "playwright-cli",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "node --version",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm --version",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- fill *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- click *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- check *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- uncheck *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- snapshot",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- reload",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm run browser -- close",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm install -g *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "npm install --global *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "rm *",
+      "effect": "deny"
+    }
+  ]
+}

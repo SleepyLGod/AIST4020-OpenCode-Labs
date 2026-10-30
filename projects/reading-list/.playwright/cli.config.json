@@ -1,0 +1,28 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "isolated": true,
+    "launchOptions": {
+      "headless": false,
+      "channel": "chromium"
+    },
+    "contextOptions": {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "serviceWorkers": "block"
+    }
+  },
+  "network": {
+    "allowedOrigins": [
+      "http://127.0.0.1:4175",
+      "https://example.com"
+    ]
+  },
+  "outputDir": "output/playwright",
+  "timeouts": {
+    "action": 5000,
+    "navigation": 15000
+  }
+}

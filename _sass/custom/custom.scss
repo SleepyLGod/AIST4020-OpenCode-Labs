@@ -1,0 +1,19 @@
+// Keep long prompts readable without horizontal scrolling on a phone.
+.main-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.main-content img { max-width: 100%; height: auto; }
+
+// Connection dialogs form a pair on desktop and a sequence on narrow screens.
+.main-content .connection-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+
+  figure { margin: 0; min-width: 0; }
+  img { display: block; width: 100%; }
+  figcaption { margin-top: 0.4rem; font-size: 0.875rem; }
+}
+
+@media (max-width: 48rem) {
+  .main-content .connection-screens { grid-template-columns: 1fr; }
+}

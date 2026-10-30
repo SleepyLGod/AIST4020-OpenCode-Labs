@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reading List</title>
+    <link rel="icon" href="assets/book-open.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="page-width brand">
+        <img src="assets/book-open.svg" alt="" width="28" height="28">
+        <h1>Reading List</h1>
+      </div>
+    </header>
+    <main class="page-width">
+      <section aria-labelledby="add-heading" class="add-section">
+        <h2 id="add-heading">Save an article</h2>
+        <form id="article-form">
+          <div class="field">
+            <label for="article-title">Title</label>
+            <input id="article-title" name="title" required maxlength="200" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="article-url">URL</label>
+            <input id="article-url" name="url" type="url" required placeholder="https://" autocomplete="off">
+          </div>
+          <button type="submit" class="save-button">Save article</button>
+        </form>
+        <p id="error" role="alert" hidden></p>
+        <p id="announcement" class="sr-only" role="status"></p>
+      </section>
+      <section aria-labelledby="articles-heading" class="articles-section">
+        <div class="section-heading">
+          <h2 id="articles-heading">Your articles</h2>
+          <span id="article-count">0 articles</span>
+        </div>
+        <p id="empty-state">No saved articles</p>
+        <ul id="article-list"></ul>
+      </section>
+      <footer>Stored in this browser.</footer>
+    </main>
+  </body>
+</html>
