@@ -1,0 +1,64 @@
+name: Deploy course website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler: '2.5.22'
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check and package the starter
+        run: |
+          python3 -m unittest discover -s tests -v
+          node --test projects/reading-list/tests/articles.test.js
+          python3 scripts/package_starter.py
+      - name: Build and check the website
+        env:
+          PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          JEKYLL_ENV: production
+        run: |
+          ruby -rjson -e 'File.write(ARGV[0], JSON.generate({url: ENV.fetch("PAGES_ORIGIN"), baseurl: ENV.fetch("PAGES_BASE_PATH")}))' "$RUNNER_TEMP/pages.json"
+          bundle exec jekyll build --config "_config.yml,$RUNNER_TEMP/pages.json"
+          python3 scripts/check_site.py _site --baseurl "$PAGES_BASE_PATH"
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
