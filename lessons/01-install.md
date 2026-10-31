@@ -41,7 +41,6 @@ not delete your conversations.
 ## Connect a Model Provider
 
 NVIDIA offers free model APIs on [NVIDIA Build](https://build.nvidia.com/models).
-Connect your account, then choose a model:
 
 1. Choose an available model on NVIDIA Build, for example [GLM-5.3-Flash](https://build.nvidia.com/z-ai/glm-5-3-flash). Sign in and select **Generate API Key** under **Build**.
 

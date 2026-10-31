@@ -144,8 +144,7 @@ Here is the reply from our run:
 
 [![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})
 
-Compare its reply with the earlier results report. OpenCode saves the conversation
-so you can continue the work.
+Compare its reply with the earlier results report.
 
 Now use `/new` to start a separate conversation:
 

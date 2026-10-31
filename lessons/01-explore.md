@@ -80,7 +80,8 @@ OpenCode then asks to check the website's address and open the test browser:
 
 [![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})
 
-In this recorded run, a second server start failed; OpenCode then used the running website.
+This run used an earlier prompt that did not say the website was already running.
+After a duplicate start failed, OpenCode used the running website.
 
 [![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }})
 
