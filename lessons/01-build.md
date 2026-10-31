@@ -117,6 +117,12 @@ separate from OpenCode's test articles. Try opening and deleting an article too.
 If something is wrong, tell OpenCode what you did, what happened, and what you
 expected. You can also ask for an improvement of your own.
 
+While using Plan or Build mode, you may see **Compaction**:
+
+[![Automatic compaction summarizing the reading-status task during our run]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }})]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }})
+
+OpenCode stores your conversation, tool calls and the results locally in [SQLite](https://sqlite.org/). To stay within the model’s context limit, it automatically summarizes the conversation while keeping recent messages. This is **compaction**. We will explain more in a later lab.
+
 ## Continue or Start a New Conversation
 
 Exit OpenCode with `/exit`, reopen it in the same project, and use `/sessions`
@@ -124,23 +130,19 @@ to find the conversation:
 
 [![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})
 
-Select it and continue with a question, for example:
+OpenCode names the conversation from your first message. Select it; you can use
+`/rename` to change its name.
+
+Continue with a question, for example:
 
 ```text
 What did we change, and were any checks left unfinished?
 Use our earlier conversation; do not run tools. Keep the answer short.
 ```
 
-From OpenCode's reply:
-
-[![Excerpt of the restored conversation: OpenCode recalls the checks and what was left untested]({{ '/assets/lab-01/opencode-resumed-checks.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-checks.png' | relative_url }})
-
-<details markdown="1">
-<summary>Full question and reply</summary>
+Here is the reply from our run:
 
 [![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})
-
-</details>
 
 Compare its reply with the earlier results report. OpenCode saves the conversation
 so you can continue the work.
@@ -149,9 +151,9 @@ Now use `/new` to start a separate conversation:
 
 [![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})
 
-You can ask the same question and compare the replies. The new conversation does
-not include the old messages, but it uses the same project files: starting it does
-not undo your website changes. Use `/sessions` to return to the original conversation.
+You can ask the same question and compare the replies. The new conversation has
+no old messages, but uses the same project files, instructions, Skills, and project
+settings.
 
 **References**
 

@@ -30,6 +30,7 @@ with exclusive ends. Unlisted columns use the full terminal width.
 | `opencode-plan-result.png` | 7700408 | 10-32 | Follow-up asking for a simpler plan, and the real four-point reply. |
 | `opencode-build-selected.png` | 8111642 | 1-7 | Actual Plan-to-Build switch and implementation confirmation. |
 | `opencode-edit-approval.png` | 8111642 | 24-39 | Actual request to add `read: false` to `articles.js`. |
+| `opencode-auto-compaction.png` | 12307146 | 13-21 | Automatic compaction in progress after eleven passing tests and before browser acceptance; beginning of the generated summary. |
 | `opencode-implementation-result.png` | 16580654 | 14-30 | Combined program-test and browser report, including untested behavior. |
 | `opencode-sessions.png` | 16659884 | 10-20; columns 17-102 | Session picker after exiting and restarting OpenCode. |
 | `opencode-resumed-conversation.png` | 16924575 | 1-31 | The actual question and reply after restoring the completed conversation. |
@@ -54,6 +55,10 @@ Important qualifications:
 - OpenCode automatically compacted history twice. No manual compaction was
   requested. During acceptance it prefixed browser commands with an environment
   variable, causing additional approvals under the unchanged rules.
+- The compact compaction image is a contiguous crop from the unchanged terminal
+  replay, not a new run. The corresponding record in `messages.json`,
+  `msg_1915f8ba10021838E5GM12K8Zk`, has `reason: auto` and `status: completed`.
+  The screenshot shows summary generation in progress, not the final full summary.
 - The model's installation proposal says the browser dependency is needed for
   tests. This is imprecise: `npm test` uses Node's built-in test runner. The
   screenshot is unchanged; a short correction follows it in the lesson.
