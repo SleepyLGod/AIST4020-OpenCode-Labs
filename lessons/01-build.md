@@ -1,20 +1,19 @@
 ---
 layout: default
-title: "3. Improve the Website"
+title: "3. Develop a Feature with OpenCode"
 parent: "Lab 1: Getting Started with OpenCode"
 nav_order: 3
 permalink: /lessons/getting-started/build/
 ---
 
-# 3. Improve the Website
+# 3. Develop a Feature with OpenCode
 
-The website can save articles, but you cannot tell which ones you have read.
-Let's ask OpenCode to add an **Unread / Read** choice and filters.
+We now know what the website does: it saves article links, but cannot distinguish
+read articles from unread ones. Let's ask OpenCode to add reading status and filters.
 
-OpenCode has two modes we will use: **Plan** to discuss the changes without
-editing the website, and **Build** to implement them.
+OpenCode provides **Plan** mode to discuss changes and **Build** mode to implement and check them.
 
-## Discuss the Change in Plan Mode
+## Discuss the Change
 
 Enter `/agents` and choose **plan**.
 
@@ -33,7 +32,7 @@ Plan this improvement to the website at http://127.0.0.1:4175/:
 Include both kinds of checks in the implementation:
 1. Add and run tests for these behaviors, including loading articles saved by the old version.
 2. Try the website in a fresh, visible test browser, separate from my personal browser:
-   - Add Alpha at https://example.com/alpha and Beta at https://example.com/beta.
+   - Add two example articles: Alpha at https://example.com/alpha and Beta at https://example.com/beta.
    - Check that both start unread, then mark Beta as read.
    - All should show both; Unread only Alpha; Read only Beta.
    - Refresh, then select All. Both articles should remain, with Alpha unread and Beta read.
@@ -45,86 +44,120 @@ After implementation, summarize the changes and what passed, failed, or could no
 For now, give me a short plan and do not change code.
 ```
 
-The browser check starts with an empty list and uses Alpha and Beta. The program
-tests separately check that older saved articles still load.
+Discuss the proposal until it describes the website you want. We asked for a
+shorter explanation of the page changes and checks:
 
-Discuss how you want the website to work until you are happy with the plan.
+[![Our follow-up question and OpenCode's four-point plan for the controls, filters, saved data, and checks]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})
 
-## Let Build Mode Implement It
+## Implement and Check
 
 When the plan looks right, use `/agents` to select **Build** in the same conversation.
-Confirm the plan, for example:
+Saying yes alone does not change the mode.
+
+Then confirm. Its reply above mentioned opening links, so we reminded it to leave
+the example links unopened:
 
 ```text
-Yes, implement the plan and carry out both the tests and the browser checks.
-Show me the results.
+Yes, implement the plan and carry out both the tests and the browser checks. Keep the Alpha and Beta links unopened, as originally requested. Show me the results.
 ```
 
-OpenCode will request permission to edit files and run test commands. Approve the
+[![OpenCode confirms the switch from Plan to Build, followed by our instruction to implement and check]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})
+
+During implementation, OpenCode asks permission to edit files and run tests. Approve the
 work you agreed to. Reject an unexpected action first, then ask OpenCode why it is needed.
+
+Here, adding `read: false` makes new articles start unread:
 
 [![A file-edit approval showing articles.js gaining read: false, with Allow once and Reject options]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})
 
-*Earlier run: this edit makes new articles start unread.*
+OpenCode checks that new articles start unread, older saved articles still load,
+and reading status survives a reload. It then uses the browser to try the controls.
+Here is its results report from our run:
 
-Its tests check the code's behavior; the browser checks show whether the page
-works when clicked and refreshed. If it reports a failure or skips a check,
-ask it to address that before calling the work finished.
+[![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})
 
-An excerpt from an earlier run's `npm test` output:
+<details markdown="1">
+<summary>Test output from this run</summary>
 
 ```text
-✔ new articles start unread (0.046208ms)
-✔ entries saved by older versions without a read flag load as unread (0.076208ms)
-✔ read status round-trips through save and reload (0.09125ms)
-✔ a non-boolean read flag is still invalid saved data (0.080875ms)
+> test
+> node --test
+
+✔ a new browser has an empty list (1.292166ms)
+✔ article creation trims titles and normalizes web addresses (1.750708ms)
+✔ empty and oversized titles are rejected (0.120625ms)
+✔ only public-format HTTP and HTTPS links are accepted (0.079333ms)
+✔ saving and reloading preserves article data and order (0.206333ms)
+✔ invalid saved data is reported without overwriting it (0.113125ms)
+✔ storage errors are not reported as successful saves (0.124625ms)
+✔ new articles start unread (0.296667ms)
+✔ toggled read status survives saving and reloading (0.0775ms)
+✔ articles saved by the old version load as unread (0.091166ms)
+✔ saved articles with a non-boolean read status are rejected (0.084791ms)
 ℹ tests 11
 ℹ suites 0
 ℹ pass 11
 ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.761875
 ```
 
-[![OpenCode's browser report lists filter and reload checks, a corrected screenshot command, and checks it did not perform]({{ '/assets/lab-01/opencode-browser-results.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-results.png' | relative_url }})
+</details>
 
-*Earlier run: OpenCode reports its browser checks, including what it did not check.*
+If OpenCode reports a failure or skips a requested check, ask it to finish that work.
 
 [![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }})
 
-*Example from an earlier run with Alpha and Beta. Your version may look different.*
-
-## Try Your Website
-
-Open <http://127.0.0.1:4175/> in your usual browser. Save an article you want to
+Now try <http://127.0.0.1:4175/> in your usual browser. Save an article you want to
 read, mark it as read, try the filters, and refresh. Your browser has its own list,
 separate from OpenCode's test articles. Try opening and deleting an article too.
 
 If something is wrong, tell OpenCode what you did, what happened, and what you
 expected. You can also ask for an improvement of your own.
 
-## Optional: Continue the Conversation
+## Continue or Start a New Conversation
 
-Enter `/sessions` to find this conversation and its earlier messages. Exit
-OpenCode, reopen it in the same project, and use `/sessions` to return to it.
-Continue with a question, for example:
+Exit OpenCode with `/exit`, reopen it in the same project, and use `/sessions`
+to find the conversation:
+
+[![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})
+
+Select it and continue with a question, for example:
 
 ```text
 What did we change, and were any checks left unfinished?
 Use our earlier conversation; do not run tools. Keep the answer short.
 ```
 
-[![A resumed conversation reports completed changes and tests, with browser checks still unfinished]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})
+From OpenCode's reply:
 
-*Earlier run: this conversation was resumed before the browser checks.*
+[![Excerpt of the restored conversation: OpenCode recalls the checks and what was left untested]({{ '/assets/lab-01/opencode-resumed-checks.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-checks.png' | relative_url }})
+
+<details markdown="1">
+<summary>Full question and reply</summary>
+
+[![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})
+
+</details>
 
 Compare its reply with the earlier results report. OpenCode saves the conversation
-so you can continue the work. To try a separate conversation, use `/new`; the
-original remains in `/sessions`, and your website changes stay in place.
+so you can continue the work.
 
-## References
+Now use `/new` to start a separate conversation:
+
+[![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})
+
+You can ask the same question and compare the replies. The new conversation does
+not include the old messages, but it uses the same project files: starting it does
+not undo your website changes. Use `/sessions` to return to the original conversation.
+
+**References**
 
 - [OpenCode 2.2.0 terminal controls](https://github.com/anomalyco/opencode/blob/v2.2.0/services/www/src/docs/content/cli/tui.mdx)
 - [Microsoft Playwright CLI](https://github.com/microsoft/playwright-cli)
 
 ---
 
-[Previous: Explore the Website]({{ '/lessons/getting-started/explore/' | relative_url }})
+[Previous: Get to Know the Project]({{ '/lessons/getting-started/explore/' | relative_url }})

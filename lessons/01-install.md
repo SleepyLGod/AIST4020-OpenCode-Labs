@@ -38,8 +38,6 @@ not delete your conversations.
 
 [![Fresh OpenCode startup before connecting NVIDIA]({{ '/assets/lab-01/opencode-unconfigured.png' | relative_url }})]({{ '/assets/lab-01/opencode-unconfigured.png' | relative_url }})
 
-*OpenCode before connecting NVIDIA. A default model name may already appear.*
-
 ## Connect a Model Provider
 
 NVIDIA offers free model APIs on [NVIDIA Build](https://build.nvidia.com/models).
@@ -54,31 +52,29 @@ Connect your account, then choose a model:
    <div class="connection-screens">
      <figure>
        <a href="{{ '/assets/lab-01/opencode-connect-clean.png' | relative_url }}"><img src="{{ '/assets/lab-01/opencode-connect-clean.png' | relative_url }}" alt="Select NVIDIA in the connection menu"></a>
-       <figcaption>Select NVIDIA.</figcaption>
      </figure>
      <figure>
        <a href="{{ '/assets/lab-01/opencode-key-clean.png' | relative_url }}"><img src="{{ '/assets/lab-01/opencode-key-clean.png' | relative_url }}" alt="Enter your key in the API key field"></a>
-       <figcaption>Enter your API key.</figcaption>
      </figure>
    </div>
 
-3. Enter `/models` and select the NVIDIA model you want to use, such as **GLM-5.3-Flash**.
+3. Enter `/models`, search for `glm`, and select **GLM-5.3-Flash** with **Nvidia** beside it.
+
+   [![The native model picker lists GLM-5.3-Flash from Nvidia separately from OpenCode's free model]({{ '/assets/lab-01/opencode-models-nvidia.png' | relative_url }})]({{ '/assets/lab-01/opencode-models-nvidia.png' | relative_url }})
 
 - To try another available NVIDIA model, select it with `/models`. If it is missing from the list, see the [model configuration guide](https://opencode.ai/v2/docs/models).
 - To connect another service, such as DeepSeek, see the [provider connection guide](https://opencode.ai/v2/docs/cli/providers).
 
 ## Try a First Conversation
 
-Send a first message:
-
 ```text
-Hello, OpenCode!
+Hello! What can you help me do? Give me three short examples. Do not run tools.
 ```
 
 [![An earlier first conversation with OpenCode using NVIDIA]({{ '/assets/lab-01/opencode-hello.png' | relative_url }})]({{ '/assets/lab-01/opencode-hello.png' | relative_url }})
 
-*Example from an earlier run: asking OpenCode what it can help with.*
+*Reply from an earlier run.*
 
 ---
 
-[Next: Explore the Website]({{ '/lessons/getting-started/explore/' | relative_url }})
+[Next: Get to Know the Project]({{ '/lessons/getting-started/explore/' | relative_url }})
