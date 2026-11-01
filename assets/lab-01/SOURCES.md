@@ -27,14 +27,14 @@ with exclusive ends. Unlisted columns use the full terminal width.
 | `opencode-browser-open-approval.png` | 2055834 | 30-39 | Separate approval for the address check and browser-open command. |
 | `opencode-explore-result.png` | 3501344 | 9-30 | Exploration results, including the duplicate-server attempt. |
 | `opencode-plan-selected.png` | 7700408 | 33-38; columns 2-76 | Actual Plan state in this conversation. |
-| `opencode-plan-result.png` | 7700408 | 10-32 | Follow-up asking for a simpler plan, and the real four-point reply. |
+| `opencode-plan-result.png` | 7045984 | 3-31 | End of the original Plan reply: program tests, browser checks, wrap-up, and the Plan mode label. |
 | `opencode-build-selected.png` | 8111642 | 1-7 | Actual Plan-to-Build switch and implementation confirmation. |
 | `opencode-edit-approval.png` | 8111642 | 24-39 | Actual request to add `read: false` to `articles.js`. |
-| `opencode-auto-compaction.png` | 12307146 | 13-21 | Automatic compaction in progress after eleven passing tests and before browser acceptance; beginning of the generated summary. |
+| `opencode-auto-compaction.png` | 12307146 | 13-16; columns 38-82 | The Compaction indicator with surrounding whitespace, after eleven passing tests and before browser acceptance. |
 | `opencode-implementation-result.png` | 16580654 | 14-30 | Combined program-test and browser report, including untested behavior. |
 | `opencode-sessions.png` | 16659884 | 10-20; columns 17-102 | Session picker after exiting and restarting OpenCode. |
 | `opencode-resumed-conversation.png` | 16924575 | 1-31 | The actual question and reply after restoring the completed conversation. |
-| `opencode-resumed-checks.png` | 16924575 | 17-31 | Continuous excerpt of the same reply: check results and unchecked behavior. The full question and reply remain available in a collapsed section. |
+| `opencode-resumed-checks.png` | 16924575 | 17-31 | Unused excerpt retained on disk. The full question and reply are shown inline in `opencode-resumed-conversation.png`. |
 | `opencode-new-conversation.png` | 16935686 | 14-28; columns 22-98 | Empty conversation after `/new`; no model request was sent in it. |
 | `before.png` | Browser artifact | Full image | OpenCode's `output/playwright/explore.png`, after adding Web Notes and Testing Notes. |
 | `after-example.png` | Browser artifact | Full image | OpenCode's `output/playwright/acceptance.png`, after completing the read/filter/reload checks. |
@@ -42,8 +42,8 @@ with exclusive ends. Unlisted columns use the full terminal width.
 Important qualifications:
 
 - The preparation prompt, full Plan prompt, Build confirmation, and resumed
-  question match the run. The shorter Plan reply followed the question visible
-  in its screenshot; it is not presented as the first Plan response.
+  question match the run. The Plan image is a continuous excerpt from the first
+  reply to the full Plan prompt, before the later request for a shorter plan.
 - The exploration prompt originally started with `Open http://127.0.0.1:4175/`.
   OpenCode attempted a second server start after the operator had already run
   its supplied startup command. That attempt was approved and failed because
@@ -56,7 +56,8 @@ Important qualifications:
   requested. During acceptance it prefixed browser commands with an environment
   variable, causing additional approvals under the unchanged rules.
 - The compact compaction image is a contiguous crop from the unchanged terminal
-  replay, not a new run. The corresponding record in `messages.json`,
+  replay, not a new run. It shows only the indicator, not the summary text.
+  The corresponding record in `messages.json`,
   `msg_1915f8ba10021838E5GM12K8Zk`, has `reason: auto` and `status: completed`.
   The screenshot shows summary generation in progress, not the final full summary.
 - The model's installation proposal says the browser dependency is needed for
@@ -76,6 +77,7 @@ Saved reply IDs:
 | Project and environment | `msg_1914ecdc8001pLGYPNkD42xFqc` |
 | Setup and startup command | `msg_191504735001RPrR0eWL4HAc99` |
 | Exploration report | `msg_19153091c001fl0w9VC0PnI10q` |
+| Original Plan reply | `msg_191551b7f001yIRaKhVLALeihk` |
 | Shorter Plan reply | `msg_19156626e0018j7SiBYN2hA7f9` |
 | Final implementation/check report | `msg_19166ba25001N5NvMEptH6ZTuV` |
 | Resumed reply | `msg_19168c97c001Z8crNk95h63a1E` |

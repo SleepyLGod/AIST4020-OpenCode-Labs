@@ -13,8 +13,8 @@ and agent loops. Now we will use **[OpenCode](https://opencode.ai/)**, an open-s
 coding agent that combines these components to work on real projects.
 
 In this lab, we will use it to understand and improve a small website without
-editing the application code ourselves. Later labs will examine its **harness**
-and implementation.
+editing the application code ourselves. Later labs will explain the concepts and
+engineering behind the features we use here.
 
 Work through these three sections:
 

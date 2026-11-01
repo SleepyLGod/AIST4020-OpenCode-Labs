@@ -17,7 +17,7 @@ OpenCode provides **Plan** mode to discuss changes and **Build** mode to impleme
 
 Enter `/agents` and choose **plan**.
 
-[![OpenCode with Plan selected below the input box]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }})
+[![OpenCode with Plan selected below the input box]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 Use this reference prompt, or adapt it to the website you want:
 
@@ -44,37 +44,28 @@ After implementation, summarize the changes and what passed, failed, or could no
 For now, give me a short plan and do not change code.
 ```
 
-Discuss the proposal until it describes the website you want. We asked for a
-shorter explanation of the page changes and checks:
+Discuss the proposal until it describes the website you want. Here is part of an
+example plan:
 
-[![Our follow-up question and OpenCode's four-point plan for the controls, filters, saved data, and checks]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})
+[![Part of OpenCode's original plan, showing the proposed checks and Plan mode]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 ## Implement and Check
 
-When the plan looks right, use `/agents` to select **Build** in the same conversation.
-Saying yes alone does not change the mode.
+Use `/agents` to switch to **Build**. Ask OpenCode to implement the plan and report
+the test results, as shown below:
 
-Then confirm. Its reply above mentioned opening links, so we reminded it to leave
-the example links unopened:
-
-```text
-Yes, implement the plan and carry out both the tests and the browser checks. Keep the Alpha and Beta links unopened, as originally requested. Show me the results.
-```
-
-[![OpenCode confirms the switch from Plan to Build, followed by our instruction to implement and check]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})
+[![OpenCode confirms the switch from Plan to Build, followed by our instruction to implement and check]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 During implementation, OpenCode asks permission to edit files and run tests. Approve the
 work you agreed to. Reject an unexpected action first, then ask OpenCode why it is needed.
 
 Here, adding `read: false` makes new articles start unread:
 
-[![A file-edit approval showing articles.js gaining read: false, with Allow once and Reject options]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})
+[![A file-edit approval showing articles.js gaining read: false, with Allow once and Reject options]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-OpenCode checks that new articles start unread, older saved articles still load,
-and reading status survives a reload. It then uses the browser to try the controls.
-Here is its results report from our run:
+In this run, OpenCode ran the program tests and browser checks. Here is its report:
 
-[![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})
+[![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 <details markdown="1">
 <summary>Test output from this run</summary>
@@ -108,7 +99,7 @@ Here is its results report from our run:
 
 If OpenCode reports a failure or skips a requested check, ask it to finish that work.
 
-[![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }})
+[![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 Now try <http://127.0.0.1:4175/> in your usual browser. Save an article you want to
 read, mark it as read, try the filters, and refresh. Your browser has its own list,
@@ -117,9 +108,9 @@ separate from OpenCode's test articles. Try opening and deleting an article too.
 If something is wrong, tell OpenCode what you did, what happened, and what you
 expected. You can also ask for an improvement of your own.
 
-While using Plan or Build mode, you may see **Compaction**:
+While using Plan or Build mode, you may see **Compaction** in OpenCode's terminal interface:
 
-[![Automatic compaction summarizing the reading-status task during our run]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }})]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }})
+[![The Compaction indicator during our run]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }}){:width="424"}]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 OpenCode stores your conversation, tool calls and the results locally in [SQLite](https://sqlite.org/). To stay within the model’s context limit, it automatically summarizes the conversation while keeping recent messages. This is **compaction**. We will explain more in a later lab.
 
@@ -128,10 +119,11 @@ OpenCode stores your conversation, tool calls and the results locally in [SQLite
 Exit OpenCode with `/exit`, reopen it in the same project, and use `/sessions`
 to find the conversation:
 
-[![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})
+[![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-OpenCode names the conversation from your first message. Select it; you can use
-`/rename` to change its name.
+OpenCode generated this session name from our first message: "I'm new to this
+project. Briefly explain what it does. ..." Select the conversation to continue.
+You can also use `/rename` to change its name.
 
 Continue with a question, for example:
 
@@ -142,13 +134,13 @@ Use our earlier conversation; do not run tools. Keep the answer short.
 
 Here is the reply from our run:
 
-[![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})
+[![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 Compare its reply with the earlier results report.
 
 Now use `/new` to start a separate conversation:
 
-[![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})
+[![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 You can ask the same question and compare the replies. The new conversation has
 no old messages, but uses the same project files, instructions, Skills, and project

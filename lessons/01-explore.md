@@ -13,8 +13,7 @@ Let's ask OpenCode to explain the project, prepare its environment, and help us 
 ## Understand and Prepare the Project
 
 Download and unzip [reading-list-starter.zip]({{ '/downloads/reading-list-starter.zip' | relative_url }}).
-In the `reading-list` project folder, run `opencode --standalone` and select your
-model with `/models` if needed. Reference prompt:
+In the `reading-list` project folder, run `opencode --standalone`. Reference prompt:
 
 ```text
 I'm new to this project. Briefly explain what it does.
@@ -26,27 +25,30 @@ If it runs in a browser, use http://127.0.0.1:4175/.
 Do not start it yet or change application code.
 ```
 
-Here is how OpenCode described the project in our run:
+Here is an example of OpenCode's project description:
 
-[![OpenCode explains that the project saves article links and keeps them across reloads]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})
+[![OpenCode explains that the project saves article links and keeps them across reloads]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Discuss what to install and where before agreeing to OpenCode's proposal:
+You can discuss what to install and where with OpenCode before agreeing on the
+final environment configuration:
 
-[![OpenCode reports installed tools, missing dependencies, and proposed installations]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})
+[![OpenCode reports installed tools, missing dependencies, and proposed installations]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-One correction to this reply: the browser package is for browser checks;
-the program tests use Node.js itself.
+In this project, `npm ci` installs the browser tool; `npm test` runs the program
+tests with Node.js.
 
 When it asks to run a command, such as `npm ci` to install this project's dependencies, choose
 **Allow once** if it matches your agreement, or **Reject** if it does not.
 
-[![A real permission request to run npm ci, with Allow once and Reject choices]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }})
+[![A real permission request to run npm ci, with Allow once and Reject choices]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![OpenCode's setup report lists installed dependencies, seven passing starter tests, and the website ready to start]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }})
+Here is an example setup report:
+
+[![OpenCode's setup report lists installed dependencies, seven passing starter tests, and the website ready to start]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 ## See What the Website Does
 
-In a new terminal in the project folder, run the command OpenCode just provided:
+Run the command OpenCode provided in a new terminal in the project folder:
 
 ```sh
 PORT=4175 npm start
@@ -55,7 +57,7 @@ PORT=4175 npm start
 Once you see `Reading List: http://127.0.0.1:4175`, leave the server running
 and return to OpenCode.
 
-Ask OpenCode to try the website. Reference prompt:
+You can try the website yourself, or ask OpenCode to explore it for you. Reference prompt:
 
 ```text
 I've started the website at http://127.0.0.1:4175/.
@@ -69,21 +71,21 @@ Briefly explain what you could do on the page and what happened after refreshing
 Save a screenshot to output/playwright/explore.png, then close the test browser.
 ```
 
-We included the **playwright-cli Skill**, a guide to the browser tool.
-This request asks to read it:
+We've included the **playwright-cli Skill** in the project folder to guide browser
+testing. OpenCode may ask permission to load it:
 
-[![OpenCode requests permission to read the playwright-cli Skill]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }})
+[![OpenCode requests permission to read the playwright-cli Skill]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-OpenCode then asks to check the website's address and open the test browser:
+OpenCode may also ask permission to check the website's address and open the test browser:
 
-[![A separate approval to check the local website and open the test browser]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})
+[![A separate approval to check the local website and open the test browser]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})
+[![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-This run used an earlier prompt that did not say the website was already running.
-After a duplicate start failed, OpenCode used the running website.
+Our earlier prompt did not mention that the website was already running, and
+OpenCode tried to start it again. The prompt above now says it is already running.
 
-[![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }})
+[![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 In this example, the two saved articles remain after refreshing, but the page has no reading-status
 or filter controls. OpenCode's test browser has its own list; these entries will
@@ -96,7 +98,7 @@ such as explaining installations before running them. Read it with:
 cat AGENTS.md
 ```
 
-Later labs will explain how OpenCode uses these project instructions.
+Later labs will explain what these project instructions are and how OpenCode uses them.
 
 ---
 
