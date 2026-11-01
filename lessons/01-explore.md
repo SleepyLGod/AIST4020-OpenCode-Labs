@@ -37,7 +37,7 @@ final environment configuration:
 In this project, `npm ci` installs the browser tool; `npm test` runs the program
 tests with Node.js.
 
-When it asks to run a command, such as `npm ci` to install this project's dependencies, choose
+When it asks to run a command, choose
 **Allow once** if it matches your agreement, or **Reject** if it does not.
 
 [![A real permission request to run npm ci, with Allow once and Reject choices]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
