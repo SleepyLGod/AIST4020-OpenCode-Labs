@@ -30,7 +30,7 @@ Here is an example of OpenCode's project description:
 [![OpenCode explains that the project saves article links and keeps them across reloads]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 You can discuss what to install and where with OpenCode before agreeing on the
-final environment configuration. Here is OpenCode's environment check from our demo:
+final environment configuration. Here is an environment check from one OpenCode demo run:
 
 [![OpenCode's environment check shows installed tools and missing project dependencies and test browser]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }}){:target="_blank" rel="noopener"}
 
@@ -70,6 +70,8 @@ Briefly explain what you could do on the page and what happened after refreshing
 Save a screenshot to output/playwright/explore.png, then close the test browser.
 ```
 
+The test browser does not share saved articles with your usual browser.
+
 We've included the **playwright-cli Skill** in the project folder to guide browser
 testing. OpenCode may ask permission to load it:
 
@@ -79,19 +81,14 @@ OpenCode may also ask permission to check the website's address and open the tes
 
 [![A separate approval to check the local website and open the test browser]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Here is what OpenCode found when it tried the website:
-
-In this earlier run, our reference prompt did not say the website was already
-running, so OpenCode tried to start it again.
+Here is OpenCode's report from a demo run. It tried to start the website again,
+then used the server that was already running.
 
 [![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In this run, both articles remained after refreshing, but you can see this reading
-list website still lacks read/unread controls and filters.
+Here is the website after OpenCode added the two articles:
 
 [![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-OpenCode's test browser has its own list; these entries will not appear in your usual browser.
 
 We also prepared **AGENTS.md** with instructions for working in this project,
 such as explaining installations before running them. Read it with:

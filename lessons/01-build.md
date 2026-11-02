@@ -67,12 +67,11 @@ OpenCode will then run the checks in your plan and report the results like this:
 
 [![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-If OpenCode reports a failure or skips a requested check, ask it to finish that work.
+If a check fails or is skipped, ask OpenCode to complete it. Below is the updated
+website from our demo run. Try your version at <http://127.0.0.1:4175/>: add an
+article, mark it as read, try the filters, and refresh.
 
 [![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-After OpenCode finishes, try the website yourself at <http://127.0.0.1:4175/>.
-Add an article, mark it as read, try the filters, and refresh.
 
 If something is wrong, tell OpenCode what you did, what happened, and what you
 expected. You can also ask for an improvement of your own.
@@ -83,28 +82,29 @@ While using Plan or Build mode, you may see **Compaction** in OpenCode's termina
 
 OpenCode stores your conversation, tool calls and the results locally in [SQLite](https://sqlite.org/). To stay within the model’s context limit, it automatically summarizes the conversation while keeping recent messages. This is **compaction**. We will explain more in a later lab.
 
-## Continue or Start a New Conversation
+## Continue or Start a New Session
+{: #continue-or-start-a-new-conversation }
 
-Exit OpenCode with `/exit`, reopen it in the same project, and use `/sessions`
-to find the conversation:
+OpenCode saves each conversation as a session. Exit the current session with
+`/exit`, reopen OpenCode in the same project, and use `/sessions` to find it:
 
 [![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 OpenCode generated this session name from our first message: "I'm new to this
-project. Briefly explain what it does. ..." Select the conversation to continue.
+project. Briefly explain what it does. ..." Select the session to continue.
 You can also use `/rename` to change its name.
 
 You can continue by asking OpenCode to recall the work without using tools, as below:
 
 [![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-You can also use `/new` to start a new conversation in the same project folder:
+You can also use `/new` to start a new session in the same project folder:
 
 [![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-You can ask the same question and compare the replies. The new conversation has
-no old messages, but uses the same project files, instructions, Skills, and project
-settings.
+A new session does not inherit the previous session's conversation history, but
+shares the project files, instructions, Skills, and settings with other sessions
+in the same project folder.
 
 **References**
 

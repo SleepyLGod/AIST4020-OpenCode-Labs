@@ -8,13 +8,13 @@ has_toc: false
 
 # Lab 1: Getting Started with OpenCode
 
-In previous labs, you built basic implementations of model calls, tool calling,
-and agent loops. Now we will use **[OpenCode](https://opencode.ai/)**, an open-source
-coding agent that combines these components to work on real projects.
+In previous labs, you explored model calls, tool calling, and agent loops through
+working examples. Now we will use **[OpenCode](https://opencode.ai/)**, an open-source
+coding agent, to bring these components together in a real project.
 
-In this lab, we will use it to understand and improve a small website without
-editing the application code ourselves. Later labs will explain the concepts and
-engineering behind the features we use here.
+In this lab, we will use OpenCode to understand and improve a website through
+conversation, without writing the application code ourselves. Later labs will
+explain the concepts and engineering behind the features we use here.
 
 Work through these three sections:
 

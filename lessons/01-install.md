@@ -12,7 +12,6 @@ permalink: /lessons/getting-started/install/
 
 This lab uses **OpenCode CLI 2.2.0**. Follow the
 [official installation guide](https://opencode.ai/v2/docs/#cli) for your operating system.
-
 For example, on macOS:
 
 ```sh
@@ -61,8 +60,9 @@ NVIDIA offers free model APIs on [NVIDIA Build](https://build.nvidia.com/models)
 
    [![The native model picker lists GLM-5.3-Flash from Nvidia separately from OpenCode's free model]({{ '/assets/lab-01/opencode-models-nvidia.png' | relative_url }})]({{ '/assets/lab-01/opencode-models-nvidia.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-- To try another available NVIDIA model, select it with `/models`. If it is missing from the list, see the [model configuration guide](https://opencode.ai/v2/docs/models).
-- To connect another service, such as DeepSeek, see the [provider connection guide](https://opencode.ai/v2/docs/cli/providers).
+You can check the [model configuration guide](https://opencode.ai/v2/docs/models)
+if a model is unavailable, or the [provider connection guide](https://opencode.ai/v2/docs/cli/providers)
+to connect another service.
 
 ## Try a Hello World Conversation
 
