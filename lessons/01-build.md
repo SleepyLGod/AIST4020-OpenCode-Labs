@@ -67,7 +67,7 @@ OpenCode will then run the checks in your plan and report the results like this:
 
 [![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-If a check fails or is skipped, ask OpenCode to complete it. Below is the updated
+If a requested check fails or is skipped, ask OpenCode to complete it. Below is the updated
 website from our demo run. Try your version at <http://127.0.0.1:4175/>: add an
 article, mark it as read, try the filters, and refresh.
 
