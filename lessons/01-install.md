@@ -66,9 +66,7 @@ NVIDIA offers free model APIs on [NVIDIA Build](https://build.nvidia.com/models)
 
 ## Try a Hello World Conversation
 
-```text
-Hello! What can you help me do? Give me three short examples. Do not run tools.
-```
+Send a short greeting to check the connection, for example:
 
 [![An earlier first conversation with OpenCode using NVIDIA]({{ '/assets/lab-01/opencode-hello.png' | relative_url }})]({{ '/assets/lab-01/opencode-hello.png' | relative_url }}){:target="_blank" rel="noopener"}
 

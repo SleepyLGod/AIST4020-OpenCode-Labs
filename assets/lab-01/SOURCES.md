@@ -20,7 +20,7 @@ with exclusive ends. Unlisted columns use the full terminal width.
 | Current asset | Endpoint | Rows | Purpose |
 | --- | ---: | --- | --- |
 | `opencode-project-explanation.png` | 433434 | 3-9 | Complete project-description paragraph. |
-| `opencode-environment.png` | 503066 | 4-30 | Environment check and installation proposal. |
+| `opencode-environment.png` | 503066 | 4-18 | Environment check table only; the installation proposal is outside this crop. |
 | `opencode-install-approval.png` | 634235 | 21-39 | User agrees to installation; actual `npm ci` approval. |
 | `opencode-setup-result.png` | 1606195 | 19-30 | Installed packages, starter tests, and the exact startup command and URL supplied by OpenCode. |
 | `opencode-skill-approval.png` | 1670502 | 28-39 | Request to load `playwright-cli`; not a browser command. |
@@ -62,7 +62,8 @@ Important qualifications:
   The screenshot shows summary generation in progress, not the final full summary.
 - The model's installation proposal says the browser dependency is needed for
   tests. This is imprecise: `npm test` uses Node's built-in test runner. The
-  screenshot is unchanged; a short correction follows it in the lesson.
+  current screenshot ends after the environment check table, before that
+  installation proposal. The original reply and terminal record are unchanged.
 - Actual tool output confirms 11 passing tests. Browser snapshots confirm the
   two defaults, read toggle, filters, reload, and filters after reload. The
   restored answer requested no tools and made no tool calls. A separate local
@@ -82,10 +83,11 @@ Saved reply IDs:
 | Final implementation/check report | `msg_19166ba25001N5NvMEptH6ZTuV` |
 | Resumed reply | `msg_19168c97c001Z8crNk95h63a1E` |
 
-The collapsed test output in Section 3 is copied verbatim from the `npm test`
+The test output previously displayed in Section 3 was copied verbatim from the `npm test`
 tool result in `messages.json`, message `msg_1915e9b160015ugVrE91oVvYs1`, tool
-`a8579214-4fe6-445d-9e4d-86e18298ac10`. Only the surrounding blank line is omitted.
-The command completed with exit code 0; its reported test counts are unchanged.
+`a8579214-4fe6-445d-9e4d-86e18298ac10`. It remains in the original record; the
+lesson now shows the results report without repeating the full test log.
+The command completed with exit code 0 and reported 11 passing tests.
 
 SHA-256:
 

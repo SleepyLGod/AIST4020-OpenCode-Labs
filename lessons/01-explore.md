@@ -30,12 +30,11 @@ Here is an example of OpenCode's project description:
 [![OpenCode explains that the project saves article links and keeps them across reloads]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 You can discuss what to install and where with OpenCode before agreeing on the
-final environment configuration:
+final environment configuration. Here is OpenCode's environment check from our demo:
 
-[![OpenCode reports installed tools, missing dependencies, and proposed installations]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![OpenCode's environment check shows installed tools and missing project dependencies and test browser]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In this project, `npm ci` installs the browser tool; `npm test` runs the program
-tests with Node.js.
+In this demo, the project dependencies and test browser still needed to be installed.
 
 When it asks to run a command, choose
 **Allow once** if it matches your agreement, or **Reject** if it does not.
@@ -80,16 +79,19 @@ OpenCode may also ask permission to check the website's address and open the tes
 
 [![A separate approval to check the local website and open the test browser]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
+Here is what OpenCode found when it tried the website:
+
+In this earlier run, our reference prompt did not say the website was already
+running, so OpenCode tried to start it again.
+
 [![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Our earlier prompt did not mention that the website was already running, and
-OpenCode tried to start it again. The prompt above now says it is already running.
+In this run, both articles remained after refreshing, but you can see this reading
+list website still lacks read/unread controls and filters.
 
 [![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In this example, the two saved articles remain after refreshing, but the page has no reading-status
-or filter controls. OpenCode's test browser has its own list; these entries will
-not appear in your usual browser.
+OpenCode's test browser has its own list; these entries will not appear in your usual browser.
 
 We also prepared **AGENTS.md** with instructions for working in this project,
 such as explaining installations before running them. Read it with:

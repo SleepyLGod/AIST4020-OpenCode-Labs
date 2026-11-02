@@ -44,8 +44,8 @@ After implementation, summarize the changes and what passed, failed, or could no
 For now, give me a short plan and do not change code.
 ```
 
-Discuss the proposal until it describes the website you want. Here is part of an
-example plan:
+Discuss the proposal until it describes the website you want. Here is a part of
+OpenCode's plan from our demo:
 
 [![Part of OpenCode's original plan, showing the proposed checks and Plan mode]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }}){:target="_blank" rel="noopener"}
 
@@ -59,51 +59,20 @@ the test results, as shown below:
 During implementation, OpenCode asks permission to edit files and run tests. Approve the
 work you agreed to. Reject an unexpected action first, then ask OpenCode why it is needed.
 
-Here, adding `read: false` makes new articles start unread:
+For example, here is a request to edit a project file:
 
 [![A file-edit approval showing articles.js gaining read: false, with Allow once and Reject options]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In this run, OpenCode ran the program tests and browser checks. Here is its report:
+OpenCode will then run the checks in your plan and report the results like this:
 
 [![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-<details markdown="1">
-<summary>Test output from this run</summary>
-
-```text
-> test
-> node --test
-
-✔ a new browser has an empty list (1.292166ms)
-✔ article creation trims titles and normalizes web addresses (1.750708ms)
-✔ empty and oversized titles are rejected (0.120625ms)
-✔ only public-format HTTP and HTTPS links are accepted (0.079333ms)
-✔ saving and reloading preserves article data and order (0.206333ms)
-✔ invalid saved data is reported without overwriting it (0.113125ms)
-✔ storage errors are not reported as successful saves (0.124625ms)
-✔ new articles start unread (0.296667ms)
-✔ toggled read status survives saving and reloading (0.0775ms)
-✔ articles saved by the old version load as unread (0.091166ms)
-✔ saved articles with a non-boolean read status are rejected (0.084791ms)
-ℹ tests 11
-ℹ suites 0
-ℹ pass 11
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 77.761875
-```
-
-</details>
 
 If OpenCode reports a failure or skips a requested check, ask it to finish that work.
 
 [![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Now try <http://127.0.0.1:4175/> in your usual browser. Save an article you want to
-read, mark it as read, try the filters, and refresh. Your browser has its own list,
-separate from OpenCode's test articles. Try opening and deleting an article too.
+After OpenCode finishes, try the website yourself at <http://127.0.0.1:4175/>.
+Add an article, mark it as read, try the filters, and refresh.
 
 If something is wrong, tell OpenCode what you did, what happened, and what you
 expected. You can also ask for an improvement of your own.
@@ -125,20 +94,11 @@ OpenCode generated this session name from our first message: "I'm new to this
 project. Briefly explain what it does. ..." Select the conversation to continue.
 You can also use `/rename` to change its name.
 
-Continue with a question, for example:
-
-```text
-What did we change, and were any checks left unfinished?
-Use our earlier conversation; do not run tools. Keep the answer short.
-```
-
-Here is the reply from our run:
+You can continue by asking OpenCode to recall the work without using tools, as below:
 
 [![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Compare its reply with the earlier results report.
-
-Now use `/new` to start a separate conversation:
+You can also use `/new` to start a new conversation in the same project folder:
 
 [![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
