@@ -64,12 +64,20 @@ You can check the [model configuration guide](https://opencode.ai/v2/docs/models
 if a model is unavailable, or the [provider connection guide](https://opencode.ai/v2/docs/cli/providers)
 to connect another service.
 
+*NVIDIA's free API is intended for experimentation. Response times can vary.*
+
 ## Try a Hello World Conversation
 
 Send a short greeting to check the connection, for example:
+
+```text
+Hello! What can you help me do? Give me three short examples. Do not run tools.
+```
+
+OpenCode may reply like this:
 
 [![An earlier first conversation with OpenCode using NVIDIA]({{ '/assets/lab-01/opencode-hello.png' | relative_url }})]({{ '/assets/lab-01/opencode-hello.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 ---
 
-[Next: Get to Know the Project]({{ '/lessons/getting-started/explore/' | relative_url }})
+[Next: Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }})

@@ -1,116 +1,91 @@
 ---
 layout: default
-title: "3. Develop a Feature with OpenCode"
+title: "3. Build with OpenCode"
 parent: "Lab 1: Getting Started with OpenCode"
 nav_order: 3
 permalink: /lessons/getting-started/build/
 ---
 
-# 3. Develop a Feature with OpenCode
+# 3. Build with OpenCode
 
-We now know what the website does: it saves article links, but cannot distinguish
-read articles from unread ones. Let's ask OpenCode to add reading status and filters.
+With the Skill and environment ready, let's ask OpenCode to plan and build the PDF tool.
 
-OpenCode provides **Plan** mode to discuss changes and **Build** mode to implement and check them.
+## Discuss the Plan
 
-## Discuss the Change
+OpenCode provides **Plan** mode to discuss changes and **Build** mode to implement and check them. Return to the terminal running OpenCode. Enter `/agents` and choose **Plan**.
 
-Enter `/agents` and choose **plan**.
+[![OpenCode Plan mode selection menu]({{ '/assets/lab-01-pdf/plan-mode.png' | relative_url }})]({{ '/assets/lab-01-pdf/plan-mode.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![OpenCode with Plan selected below the input box]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-selected.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-Use this reference prompt, or adapt it to the website you want:
+Ask OpenCode for an implementation plan by pasting this prompt into the conversation:
 
 ```text
-Plan this improvement to the website at http://127.0.0.1:4175/:
-- Let me mark each article as read or unread.
-- Add All, Unread, and Read filters.
-- Keep my saved articles and their existing reading status, including after a page reload.
-- New articles, and older ones with no reading status, should start unread.
-- Keep adding, opening, and deleting articles working.
+Plan a Python tool that reads the PDF papers in input/, splits their text into manageable chunks, and saves output/chunks.jsonl. Each record should contain the text, source filename, page number, and a chunk ID. Keep the original PDFs unchanged.
 
-Include both kinds of checks in the implementation:
-1. Add and run tests for these behaviors, including loading articles saved by the old version.
-2. Try the website in a fresh, visible test browser, separate from my personal browser:
-   - Add two example articles: Alpha at https://example.com/alpha and Beta at https://example.com/beta.
-   - Check that both start unread, then mark Beta as read.
-   - All should show both; Unread only Alpha; Read only Beta.
-   - Refresh, then select All. Both articles should remain, with Alpha unread and Beta read.
-     Check all three filters again; the selected filter does not need to survive a refresh.
-   - Do not open these example links. Save a screenshot to output/playwright/acceptance.png,
-     then close the test browser.
+The tool must run locally without calling a language model or external processing service. Write and run automated tests, then run it on the supplied papers. Check that the text is readable and the source filenames and page numbers are correct.
 
-After implementation, summarize the changes and what passed, failed, or could not be checked.
-For now, give me a short plan and do not change code.
+Keep the implementation simple. Briefly explain your plan; do not implement it yet. Use the installed PDF Skill where it helps.
 ```
 
-Discuss the proposal until it describes the website you want. Here is a part of
-OpenCode's plan from our demo:
+You can adjust the plan to your needs or discuss it further with OpenCode. Here is a complete plan offered by OpenCode in our run:
 
-[![Part of OpenCode's original plan, showing the proposed checks and Plan mode]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-plan-result.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![Complete saved Plan reply]({{ '/assets/lab-01-pdf/plan-complete.png' | relative_url }})]({{ '/assets/lab-01-pdf/plan-complete.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-## Implement and Check
+## Let OpenCode Build and Check
 
-Use `/agents` to switch to **Build**. Ask OpenCode to implement the plan and report
-the test results, as shown below:
+When the plan is ready, use `/agents` to select **Build** in the same session:
 
-[![OpenCode confirms the switch from Plan to Build, followed by our instruction to implement and check]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }})]({{ '/assets/lab-01/opencode-build-selected.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![OpenCode Build mode selection menu]({{ '/assets/lab-01-pdf/build-mode.png' | relative_url }})]({{ '/assets/lab-01-pdf/build-mode.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-During implementation, OpenCode asks permission to edit files and run tests. Approve the
-work you agreed to. Reject an unexpected action first, then ask OpenCode why it is needed.
+Paste this prompt into OpenCode to implement the plan and run the checks:
 
-For example, here is a request to edit a project file:
+```text
+Yes, implement the plan, run the tool and tests, and briefly report the results and where the output is saved.
+```
 
-[![A file-edit approval showing articles.js gaining read: false, with Allow once and Reject options]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-edit-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
+As in the previous section, OpenCode may ask permission to edit files or run commands. Approve the work you agreed to; ask about anything unexpected. Here, OpenCode is asking to edit `extract_chunks.py`:
 
-OpenCode will then run the checks in your plan and report the results like this:
+[![Permission to create the PDF processing tool]({{ '/assets/lab-01-pdf/edit-permission.png' | relative_url }})]({{ '/assets/lab-01-pdf/edit-permission.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![OpenCode reports eleven passing tests and completed browser checks, and identifies what it did not check]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-implementation-result.png' | relative_url }}){:target="_blank" rel="noopener"}
+After implementation, OpenCode reports what it created and checked. Here is an excerpt from our run:
 
-If a requested check fails or is skipped, ask OpenCode to complete it. Below is the updated
-website from our demo run. Try your version at <http://127.0.0.1:4175/>: add an
-article, mark it as read, try the filters, and refresh.
+[![Excerpt from the saved Build results]({{ '/assets/lab-01-pdf/build-results.png' | relative_url }})]({{ '/assets/lab-01-pdf/build-results.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![Example completed website with reading-state controls]({{ '/assets/lab-01/after-example.png' | relative_url }})]({{ '/assets/lab-01/after-example.png' | relative_url }}){:target="_blank" rel="noopener"}
+If a requested check fails or the output file is missing, ask OpenCode to resolve it before continuing. To see the result, open the JSONL file at the path OpenCode reports.
 
-If something is wrong, tell OpenCode what you did, what happened, and what you
-expected. You can also ask for an improvement of your own.
+While working in Plan or Build mode, you may see a **Compaction** indicator in the OpenCode CLI:
 
-While using Plan or Build mode, you may see **Compaction** in OpenCode's terminal interface:
+[![Example of OpenCode's Compaction indicator]({{ '/assets/lab-01-pdf/compaction-example.png' | relative_url }})]({{ '/assets/lab-01-pdf/compaction-example.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![The Compaction indicator during our run]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }}){:width="424"}]({{ '/assets/lab-01/opencode-auto-compaction.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-OpenCode stores your conversation, tool calls and the results locally in [SQLite](https://sqlite.org/). To stay within the model’s context limit, it automatically summarizes the conversation while keeping recent messages. This is **compaction**. We will explain more in a later lab.
+When the conversation approaches the model's context limit, OpenCode summarizes earlier messages while keeping recent ones. This continues the same session; it does not start a new one. You **may not** see compaction during your run. Later labs will explain how it works.
 
 ## Continue or Start a New Session
-{: #continue-or-start-a-new-conversation }
 
-OpenCode saves each conversation as a session. Exit the current session with
-`/exit`, reopen OpenCode in the same project, and use `/sessions` to find it:
+OpenCode saves each conversation as a session. Exit with `/exit` and run `opencode --standalone` again in **opencode-lab1/**. Enter `/sessions` to open the list shown below, then select your earlier session:
 
-[![The sessions menu after restarting OpenCode lists the conversation used to develop this website]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }})]({{ '/assets/lab-01/opencode-sessions.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![Select the earlier PDF Extraction session]({{ '/assets/lab-01-pdf/sessions.png' | relative_url }})]({{ '/assets/lab-01-pdf/sessions.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-OpenCode generated this session name from our first message: "I'm new to this
-project. Briefly explain what it does. ..." Select the session to continue.
-You can also use `/rename` to change its name.
+OpenCode generated this session name from our first message: *"Install PDF Extraction locally in this project for OpenCode: ..."* You can also use `/rename` to change it.
 
-You can continue by asking OpenCode to recall the work without using tools, as below:
+Continue with this reference prompt:
 
-[![Our question after restoring the conversation, followed by OpenCode's full recap]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-resumed-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
+```text
+What did we build, and were any requested checks left unfinished? Use our earlier conversation; do not run tools. Keep the answer short.
+```
 
-You can also use `/new` to start a new session in the same project folder:
+Here is the question and reply from our reopened session:
 
-[![A new OpenCode conversation has an empty input area and no earlier messages]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }})]({{ '/assets/lab-01/opencode-new-conversation.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![Full question and reply after reopening the session]({{ '/assets/lab-01-pdf/session-reply.png' | relative_url }})]({{ '/assets/lab-01-pdf/session-reply.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-A new session does not inherit the previous session's conversation history, but
-shares the project files, instructions, Skills, and settings with other sessions
-in the same project folder.
+You can also use `/new` to start a new session in the same project folder. It does not inherit the previous session's conversation history, but shares the project files, instructions, installed Skills and settings.
 
-**References**
+[![New session label, empty input and project path]({{ '/assets/lab-01-pdf/new-session.png' | relative_url }})]({{ '/assets/lab-01-pdf/new-session.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-- [OpenCode 2.2.0 terminal controls](https://github.com/anomalyco/opencode/blob/v2.2.0/services/www/src/docs/content/cli/tui.mdx)
-- [Microsoft Playwright CLI](https://github.com/microsoft/playwright-cli)
+## References
+
+- [OpenCode documentation](https://opencode.ai/v2/docs/)
+- [Agent Skills overview and specification](https://agentskills.io/home)
+- PDF Extraction: [Skill listing](https://www.skills.sh/claude-office-skills/skills/pdf-extraction) and [source repository](https://github.com/claude-office-skills/skills)
 
 ---
 
-[Previous: Get to Know the Project]({{ '/lessons/getting-started/explore/' | relative_url }})
+[Previous: Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }}) · [Lab 1]({{ '/lessons/getting-started/' | relative_url }})

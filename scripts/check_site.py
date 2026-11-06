@@ -52,7 +52,7 @@ def check(root: Path, baseurl: str) -> int:
                 errors.append(f'{relative}: missing target: {link}')
             elif url.fragment and target in pages and unquote(url.fragment) not in pages[target].ids:
                 errors.append(f'{relative}: missing anchor: {link}')
-    for excluded in ('projects', 'teacher', 'scripts', 'tests'):
+    for excluded in ('projects', 'teacher', 'scripts', 'tests', 'archive'):
         if (root / excluded).exists():
             errors.append(f'Private source folder was copied into site: {excluded}')
     for error in errors:

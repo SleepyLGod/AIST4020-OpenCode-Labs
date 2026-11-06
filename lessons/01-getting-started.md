@@ -12,12 +12,11 @@ In previous labs, you explored model calls, tool calling, and agent loops throug
 working examples. Now we will use **[OpenCode](https://opencode.ai/)**, an open-source
 coding agent, to bring these components together in a real project.
 
-In this lab, we will use OpenCode to understand and improve a website through
-conversation, without writing the application code ourselves. Later labs will
-explain the concepts and engineering behind the features we use here.
-
-Work through these three sections:
+In this lab, we will use OpenCode to build a PDF processing tool from scratch,
+without writing the application code ourselves. We will give it working instructions,
+install a Skill, discuss a plan, and let it implement and check the result.
+Later labs will explain the concepts and engineering behind the features we use here.
 
 1. [Set Up OpenCode]({{ '/lessons/getting-started/install/' | relative_url }})
-2. [Get to Know the Project]({{ '/lessons/getting-started/explore/' | relative_url }})
-3. [Develop a Feature with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})
+2. [Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }})
+3. [Build with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})

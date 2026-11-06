@@ -1,5 +1,5 @@
 title: AIST4020 OpenCode Labs
-description: Learn to use OpenCode by improving a real website.
+description: Learn to use OpenCode by building a PDF processing tool.
 theme: just-the-docs
 url: ""
 baseurl: ""
@@ -10,6 +10,7 @@ heading_anchors: true
 color_scheme: light
 footer_content: "AIST4020 · OpenCode case study"
 exclude:
+  - archive/
   - README.md
   - Gemfile
   - Gemfile.lock

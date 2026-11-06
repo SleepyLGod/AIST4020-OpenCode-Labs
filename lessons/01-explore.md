@@ -1,105 +1,105 @@
 ---
 layout: default
-title: "2. Get to Know the Project"
+title: "2. Prepare Your Project with OpenCode"
 parent: "Lab 1: Getting Started with OpenCode"
 nav_order: 2
 permalink: /lessons/getting-started/explore/
 ---
 
-# 2. Get to Know the Project
+# 2. Prepare Your Project with OpenCode
 
-Let's ask OpenCode to explain the project, prepare its environment, and help us run it.
+Let’s vibe-code a project from scratch with OpenCode: build a tool that turns PDF papers into text chunks, saved as JSONL with metadata such as filenames and page numbers. This simulates document preprocessing for RAG.
 
-## Understand and Prepare the Project
+Download and unzip [**opencode-lab1.zip**]({{ '/downloads/opencode-lab1.zip' | relative_url }}), then open the **opencode-lab1/** folder. It contains five PDF papers in **input/** and the project settings, but no program yet.
 
-Download and unzip [reading-list-starter.zip]({{ '/downloads/reading-list-starter.zip' | relative_url }}).
-In the `reading-list` project folder, run `opencode --standalone`. Reference prompt:
+## Give OpenCode Your Working Instructions
+
+Create **AGENTS.md** in **opencode-lab1/** and paste the following content:
+
+```markdown
+# Project working instructions
+
+- Understand the goal first. Ask when an important requirement is unclear.
+- Prefer the simplest solution that meets the requirements.
+- Use Python as the primary programming language. Use uv and keep dependencies in this project.
+- Explain what needs installing and where, and ask before installing it.
+- Keep the original files in input/ unchanged. Put generated files in output/.
+- You may revise files you create for this task. Ask before overwriting existing files. Never permanently delete files.
+- Prefer relevant skills when they can simplify the work or improve the result. Do not modify Skills or permissions.
+- Run the tool and tests yourself. Briefly report results and any remaining problems.
+```
+
+These are your working instructions for OpenCode in this project. Later labs will explain how OpenCode uses them.
+
+Open a terminal in **opencode-lab1/** and run `opencode --standalone`.
+
+## Find and Install a Skill
+
+A [Skill](https://agentskills.io/home) gives an agent reusable guidance for a particular kind of task. For example, when you ask an agent to review a pull request, it can load a code-review Skill to help it spot and explain problems in the proposed changes.
+
+Let's find a PDF extraction Skill for this project. Search for **PDF Extraction** on GitHub or on [skills.sh](https://skills.sh/), Vercel's directory of agent skills. Here are the results from skills.sh:
+
+[![Search results for PDF Extraction]({{ '/assets/lab-01-pdf/skills-search-user.png' | relative_url }})]({{ '/assets/lab-01-pdf/skills-search-user.png' | relative_url }}){:target="_blank" rel="noopener"}
+
+Open the first result shown above: [pdf-extraction](https://www.skills.sh/claude-office-skills/skills/pdf-extraction) by **claude-office-skills**. On the Skill page, the **Command** tab under **Installation** shows the install command. The link under **Repository** on the right opens the source on GitHub.
+
+[![PDF Extraction source and installation]({{ '/assets/lab-01-pdf/skill-page.png' | relative_url }})]({{ '/assets/lab-01-pdf/skill-page.png' | relative_url }}){:target="_blank" rel="noopener"}
+
+We will install it locally in the project folder so OpenCode can find it again in future sessions. Paste this reference prompt into OpenCode:
 
 ```text
-I'm new to this project. Briefly explain what it does.
-Check what is needed to run it and what is already installed.
-Before installing anything, explain what you need and where it will go, then ask me.
-Keep project dependencies and browser downloads inside this project.
-Once setup is complete, give me the exact command to start it and the address to open.
-If it runs in a browser, use http://127.0.0.1:4175/.
-Do not start it yet or change application code.
+Install PDF Extraction locally in this project for OpenCode:
+npx skills add https://github.com/claude-office-skills/skills --skill pdf-extraction -a opencode
+
+Check the existing environment and install any missing tools and dependencies needed to use this Skill for PDF text extraction. Keep project dependencies local.
+
+Explain the installations, request approval, and continue until setup is complete. Verify that OpenCode recognizes the Skill and that the dependencies work. Show me where the Skill files are installed.
+
+Do not implement the project yet.
 ```
 
-Here is an example of OpenCode's project description:
+OpenCode may ask you to approve installing the Skill and the software it needs. If required tools are missing, OpenCode may ask to install them—for example, Node.js/npm for the Skill installer, or uv and Python for PDF processing. Here, we approved both proposed installations:
 
-[![OpenCode explains that the project saves article links and keeps them across reloads]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }})]({{ '/assets/lab-01/opencode-project-explanation.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![Installation confirmation question and answer from the saved session]({{ '/assets/lab-01-pdf/install-confirmation.png' | relative_url }})]({{ '/assets/lab-01-pdf/install-confirmation.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-You can discuss what to install and where with OpenCode before agreeing on the
-final environment configuration. Here is an environment check from one OpenCode demo run:
+Installing the Skill and its dependencies involves running commands. OpenCode may ask for permission before running them:
 
-[![OpenCode's environment check shows installed tools and missing project dependencies and test browser]({{ '/assets/lab-01/opencode-environment.png' | relative_url }})]({{ '/assets/lab-01/opencode-environment.png' | relative_url }}){:target="_blank" rel="noopener"}
+[![Permission to run the Skill installation command]({{ '/assets/lab-01-pdf/command-permission.png' | relative_url }})]({{ '/assets/lab-01-pdf/command-permission.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In this demo, the project dependencies and test browser still needed to be installed.
+Choose how to respond to the request:
 
-When it asks to run a command, choose
-**Allow once** if it matches your agreement, or **Reject** if it does not.
+- **Allow once**: approve this operation only.
+- **Reject**: decline an unexpected or unclear operation, then ask OpenCode to explain.
+- **Always allow**: also allow future operations covered by the request. Choose this only if you accept that scope.
 
-[![A real permission request to run npm ci, with Allow once and Reject choices]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-install-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
+After installation, OpenCode can read the Skill's instructions. You may see an entry like this:
 
-Here is an example setup report:
+[![OpenCode loading the pdf-extraction Skill]({{ '/assets/lab-01-pdf/skill-loaded.png' | relative_url }})]({{ '/assets/lab-01-pdf/skill-loaded.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-[![OpenCode's setup report lists installed dependencies, seven passing starter tests, and the website ready to start]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-setup-result.png' | relative_url }}){:target="_blank" rel="noopener"}
+When setup is complete, OpenCode reports what it installed and where:
 
-## See What the Website Does
+[![OpenCode reports that Skill setup is complete]({{ '/assets/lab-01-pdf/setup-complete.png' | relative_url }})]({{ '/assets/lab-01-pdf/setup-complete.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Run the command OpenCode provided in a new terminal in the project folder:
+To inspect the installed Skill, open another terminal in **opencode-lab1/**. Find its file, then read it using the returned path.
 
-```sh
-PORT=4175 npm start
+On macOS or Linux:
+
+```bash
+find .agents/skills -path '*/pdf-extraction/SKILL.md'
+cat .agents/skills/pdf-extraction/SKILL.md
 ```
 
-Once you see `Reading List: http://127.0.0.1:4175`, leave the server running
-and return to OpenCode.
+On Windows PowerShell:
 
-You can try the website yourself, or ask OpenCode to explore it for you. Reference prompt:
-
-```text
-I've started the website at http://127.0.0.1:4175/.
-Open it in a separate visible test browser, not my personal browser.
-Add these two articles without opening their links:
-- Web Notes: https://example.com/web-notes
-- Testing Notes: https://example.com/testing-notes
-Refresh the page and check whether both articles remain.
-Do not change code.
-Briefly explain what you could do on the page and what happened after refreshing.
-Save a screenshot to output/playwright/explore.png, then close the test browser.
+```powershell
+Get-ChildItem .agents/skills -Recurse -Filter SKILL.md | Where-Object { $_.Directory.Name -eq 'pdf-extraction' } | Select-Object -ExpandProperty FullName
+Get-Content .agents/skills/pdf-extraction/SKILL.md
 ```
 
-The test browser does not share saved articles with your usual browser.
+[![OpenCode setup report on the left and Skill file commands on the right]({{ '/assets/lab-01-pdf/skill-files.png' | relative_url }})]({{ '/assets/lab-01-pdf/skill-files.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-We've included the **playwright-cli Skill** in the project folder to guide browser
-testing. OpenCode may ask permission to load it:
-
-[![OpenCode requests permission to read the playwright-cli Skill]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-skill-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-OpenCode may also ask permission to check the website's address and open the test browser:
-
-[![A separate approval to check the local website and open the test browser]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }})]({{ '/assets/lab-01/opencode-browser-open-approval.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-Here is OpenCode's report from a demo run. It tried to start the website again,
-then used the server that was already running.
-
-[![OpenCode reports that both articles survived the refresh and notes its unsuccessful attempt to start a second server]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }})]({{ '/assets/lab-01/opencode-explore-result.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-Here is the website after OpenCode added the two articles:
-
-[![The starter website after adding Web Notes and Testing Notes]({{ '/assets/lab-01/before.png' | relative_url }})]({{ '/assets/lab-01/before.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-We also prepared **AGENTS.md** with instructions for working in this project,
-such as explaining installations before running them. Read it with:
-
-```sh
-cat AGENTS.md
-```
-
-Later labs will explain what these project instructions are and how OpenCode uses them.
+This Skill consists of a single file, **SKILL.md**.
 
 ---
 
-[Previous: Set Up OpenCode]({{ '/lessons/getting-started/install/' | relative_url }}) |
-[Next: Develop a Feature with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})
+[Previous: Set Up OpenCode]({{ '/lessons/getting-started/install/' | relative_url }}) · [Next: Build with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})
