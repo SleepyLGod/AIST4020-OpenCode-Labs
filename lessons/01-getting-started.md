@@ -8,12 +8,9 @@ has_toc: false
 
 # Lab 1: Getting Started with OpenCode
 
-In previous labs, you explored model calls, tool calling, and agent loops through
-working examples. Now we will use **[OpenCode](https://opencode.ai/)**, an open-source
-coding agent, to bring these components together in a real project.
-
-In this lab, we will use OpenCode to build a PDF processing tool from scratch,
-without writing the application code ourselves. We will give it working instructions,
+In this lab, we will use **[OpenCode](https://opencode.ai/)**, an open-source coding
+agent, to build a PDF processing tool from scratch without writing the application
+code ourselves. We will give it working instructions,
 install a Skill, discuss a plan, and let it implement and check the result.
 Later labs will explain the concepts and engineering behind the features we use here.
 

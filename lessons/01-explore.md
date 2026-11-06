@@ -8,7 +8,7 @@ permalink: /lessons/getting-started/explore/
 
 # 2. Prepare Your Project with OpenCode
 
-Let’s vibe-code a project from scratch with OpenCode: build a tool that turns PDF papers into text chunks, saved as JSONL with metadata such as filenames and page numbers. This simulates document preprocessing for RAG.
+Let’s vibe-code a project from scratch with OpenCode: build a tool that turns PDF papers into text chunks, saved as JSONL with metadata such as filenames and page numbers.
 
 Download and unzip [**opencode-lab1.zip**]({{ '/downloads/opencode-lab1.zip' | relative_url }}), then open the **opencode-lab1/** folder. It contains five PDF papers in **input/** and the project settings, but no program yet.
 
@@ -37,18 +37,18 @@ Open a terminal in **opencode-lab1/** and run `opencode --standalone`.
 
 A [Skill](https://agentskills.io/home) gives an agent reusable guidance for a particular kind of task. For example, when you ask an agent to review a pull request, it can load a code-review Skill to help it spot and explain problems in the proposed changes.
 
-Let's find a PDF extraction Skill for this project. Search for **PDF Extraction** on GitHub or on [skills.sh](https://skills.sh/), Vercel's directory of agent skills. Here are the results from skills.sh:
+Let's find a PDF extraction Skill for this project. Search for **PDF Extraction** on GitHub or on [skills.sh](https://skills.sh/). Here are the results from skills.sh:
 
 [![Search results for PDF Extraction]({{ '/assets/lab-01-pdf/skills-search-user.png' | relative_url }})]({{ '/assets/lab-01-pdf/skills-search-user.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Open the first result shown above: [pdf-extraction](https://www.skills.sh/claude-office-skills/skills/pdf-extraction) by **claude-office-skills**. On the Skill page, the **Command** tab under **Installation** shows the install command. The link under **Repository** on the right opens the source on GitHub.
+Open the first result shown above: [pdf-extraction](https://www.skills.sh/claude-office-skills/skills/pdf-extraction). On the Skill page, the **Command** tab under **Installation** shows the install command. The link under **Repository** on the right opens the source on GitHub.
 
 [![PDF Extraction source and installation]({{ '/assets/lab-01-pdf/skill-page.png' | relative_url }})]({{ '/assets/lab-01-pdf/skill-page.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 We will install it locally in the project folder so OpenCode can find it again in future sessions. Paste this reference prompt into OpenCode:
 
 ```text
-Install PDF Extraction locally in this project for OpenCode:
+Install PDF Extraction Skill locally in this project for OpenCode:
 npx skills add https://github.com/claude-office-skills/skills --skill pdf-extraction -a opencode
 
 Check the existing environment and install any missing tools and dependencies needed to use this Skill for PDF text extraction. Keep project dependencies local.
