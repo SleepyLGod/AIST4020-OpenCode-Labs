@@ -48,7 +48,7 @@ We also provide the trace from the same run shown in the opening screenshot. Ope
 
 [![PDF task demo trace overview]({{ '/assets/lab-02/02.png' | relative_url }})]({{ '/assets/lab-02/02.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Each entry is **one model turn**: OpenCode's request and the model's response. This lab follows the demo; you can compare your own run. In this demo:
+Each trace entry records **one model call**: OpenCode's request and the model's response. The numbers below refer to the demo:
 
 - **#1:** Generate the session title: "Install PDF extraction skill for OpenCode".
 
@@ -58,7 +58,7 @@ Each entry is **one model turn**: OpenCode's request and the model's response. T
 
 - **#14–20:** Implement, test, check the output, and report (Build mode). **This is the part we’ll focus on.**
 
-Click an entry and select **Raw request** or **Raw response** to inspect what OpenCode sent or received. We use these Raw views below:
+Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} in the demo. Select **Request → Raw request** to see what OpenCode sent, or **Response → Raw response** to see what it received:
 
 [![#14 Request: Raw request and the beginning of the request body]({{ '/assets/lab-02/03.png' | relative_url }})]({{ '/assets/lab-02/03.png' | relative_url }}){:target="_blank" rel="noopener"}
 

@@ -1,6 +1,8 @@
 """Check local links, anchors, and downloads in a built Jekyll site."""
 
 import argparse
+import json
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
@@ -22,6 +24,15 @@ class Page(HTMLParser):
         for key in ('href', 'src'):
             if attributes.get(key):
                 self.links.append(attributes[key])
+
+    def handle_data(self, data: str) -> None:
+        """Recognize the trace dashboard's record routes as link targets."""
+        prefix = 'window.__TRACE_SNAPSHOT__='
+        if data.startswith(prefix):
+            snapshot = json.loads(data[len(prefix):].strip().removesuffix(';'))
+            for key in snapshot:
+                if match := re.fullmatch(r'sessions/([^/]+)/records/(\d+)', key):
+                    self.ids.add(f'/session/{match[1]}/record/{match[2]}')
 
 
 def check(root: Path, baseurl: str) -> int:

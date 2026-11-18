@@ -8,9 +8,9 @@ permalink: /lessons/harness-engineering/model-request/
 
 # 3. Preparing the Model Request
 
-Open **#14 → Request → Raw request → REQUEST BODY**. The four input parts from [Prepare model input (step 2)]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }}) in the diagram appear in this request body:
+Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Request → Raw request → REQUEST BODY**. The four input parts from [Prepare model input (step 2)]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }}) in the diagram appear in this request body:
 
-- **`messages`**: Instructions, Previous messages, and Current user prompt.
+- **`messages`**: instructions, previous messages, and the new user prompt.
 - **`tools`**: Tool definitions.
 
 ## 3.1 Instructions
@@ -32,11 +32,12 @@ ${OPENCODE_TOOL_GUIDANCE}
 ```
 {% endraw %}
 
-In the request body, this placeholder has been replaced with tool guidance, including:
+In the request body, tool guidance replaces the `${OPENCODE_TOOL_GUIDANCE}` placeholder:
 
 {% raw %}
 ```text
 - Use the write tool to create files or completely replace their content. Prefer using the edit tool for targeted changes.
+...
 ```
 {% endraw %}
 
@@ -112,11 +113,11 @@ After the instructions (`role: "system"`), the request body's `messages` contain
 
 - **`user`:** One earlier message contains our prompt: "Plan a Python tool that reads the PDF papers in input/, splits their text into manageable chunks, and saves output/chunks.jsonl."
 
-- **`assistant`: previous replies from the model**, such as "# Plan: PDF Chunking Tool" and its proposed steps.
+- **`assistant`:** A previous response from the model begins with "# Plan: PDF Chunking Tool".
 
 - **`tool`: results from previous tool calls executed by OpenCode**, including environment checks and the text read from `.agents/skills/pdf-extraction/SKILL.md`.
 
-**OpenCode's Plan/Build reminder prompts** are also in this part. Near the end of `messages`, immediately after the model's plan, we see a `user` message we did not type: "You are NO LONGER in Plan mode."
+**OpenCode's Plan/Build reminder prompts** are also in this part. Near the end of `messages`, immediately after the model's plan, we see a `user` message we did not type: "You are NO LONGER in Plan mode. ..."
 
 [![#14 Raw request: the Plan/Build reminder outlined in red]({{ '/assets/lab-02/05-reminder-highlighted.png' | relative_url }})]({{ '/assets/lab-02/05-reminder-highlighted.png' | relative_url }}){:target="_blank" rel="noopener"}
 
@@ -145,11 +146,9 @@ case "synthetic":
 ```
 {% endraw %}
 
-That is why this OpenCode-added reminder appears with `role: "user"`.
+## 3.3 New User Prompt
 
-## 3.3 Current User Prompt
-
-Then, where is the implementation prompt we entered in OpenCode?
+Where does the new user prompt asking OpenCode to implement the plan appear in #14?
 
 [![CLI: switching to Build and sending the implementation prompt]({{ '/assets/lab-02/06.png' | relative_url }})]({{ '/assets/lab-02/06.png' | relative_url }}){:target="_blank" rel="noopener"}
 
@@ -163,7 +162,7 @@ The tool definitions in diagram step 2 appear in the request body's `tools` arra
 
 [![Lab 2 - #14 Raw request - tools]({{ '/assets/lab-02/08.png' | relative_url }})]({{ '/assets/lab-02/08.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-`write` requires `path` and `content`. [`packages/core/src/tool/plugin/write.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L24) defines these inputs and the tool's description:
+[`packages/core/src/tool/plugin/write.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L24) defines two required string inputs for `write`: `path` and `content`.
 
 {% raw %}
 ```typescript
@@ -176,7 +175,7 @@ export const Input = Schema.Struct({
 ```
 {% endraw %}
 
-[`packages/core/src/tool/runtime.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/runtime.ts#L21) combines the input schema and description into the definition above.
+[`packages/core/src/tool/runtime.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/runtime.ts#L21) combines this input schema with the tool's description to build the definition shown in the screenshot.
 
 ## 3.5 Building and Sending the Request
 
@@ -198,9 +197,9 @@ messages: toLLMMessages(input.messages, input.model.ref, providerMetadataKey),
 
 - `SessionSystemPrompt.make(...)` combines `system.txt` with the tool guidance from Section 3.1.
 - `input.initial` includes the `AGENTS.md` text and run information passed through [`packages/core/src/session/context.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/context.ts#L169). Together with the prompt from `make(...)`, these form `system`, which appears as `messages[0].content` in #14's request body.
-- `toLLMMessages(...)` converts Previous messages and Current user prompt into request messages.
+- `toLLMMessages(...)` converts the previous messages and the new user prompt into request messages.
 
-Later in the same file, the call to [`LLM.request(...)`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/model-request.ts#L277) combines the instructions (`shaped.system`), previous messages and current prompt (`shaped.messages`), and available tool definitions (`hooked`):
+Later in the same file, the call to [`LLM.request(...)`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/model-request.ts#L277) combines the instructions (`shaped.system`), previous messages and new user prompt (`shaped.messages`), and available tool definitions (`hooked`):
 
 {% raw %}
 ```typescript
@@ -224,7 +223,7 @@ const providerStream = llm.stream(input.prepared.request, input.prepared.options
 ```
 {% endraw %}
 
-Next, we inspect what the model returns in **#14 Response**.
+Next, we inspect what the model returns in [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Response**.
 
 ---
 

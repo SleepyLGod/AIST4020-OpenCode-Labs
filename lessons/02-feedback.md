@@ -18,7 +18,7 @@ After approval, the terminal shows both writes completed:
 
 [![CLI: test_chunk_pdfs.py written]({{ '/assets/lab-02/13.png' | relative_url }})]({{ '/assets/lab-02/13.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-In the request body for #14, `messages` ended with your prompt. Open **#15 → Request → Raw request → REQUEST BODY**. The same 31 messages are followed by three more:
+In the request body for [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}, `messages` ended with your prompt. Open [#15]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/15){:target="_blank" rel="noopener"} **→ Request → Raw request → REQUEST BODY**. The same 31 messages are followed by three more:
 
 [![#15 Raw request: A and B pair the write calls with their results]({{ '/assets/lab-02/15-request-paired.png' | relative_url }})]({{ '/assets/lab-02/15-request-paired.png' | relative_url }}){:target="_blank" rel="noopener"}
 
@@ -75,7 +75,12 @@ needsContinuation: Iterable.some(
 ```
 {% endraw %}
 
-Before continuing, [`packages/core/src/session/runner/step.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/step.ts#L151) waits for both tools to finish. Its outcome passes the flag to `runStep()` in [`packages/core/src/session/runner/llm.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/llm.ts#L288):
+Once [both writes finish](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/step.ts#L151), [`runStep()` in `packages/core/src/session/runner/llm.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/llm.ts#L288) returns `outcome.needsContinuation`: `true` for #14.
+
+<details markdown="1">
+<summary>How runStep() returns the flag</summary>
+
+`Completed` means this step has finished. The value it returns says whether another step is needed:
 
 {% raw %}
 ```typescript
@@ -90,7 +95,9 @@ if (completed !== undefined) return completed
 ```
 {% endraw %}
 
-For #14, `runStep()` returns `true`. The [`while` loop below](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/llm.ts#L185) stores that value in `continuing`:
+</details>
+
+The [`while` loop](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/llm.ts#L185) stores the value returned by `runStep()` in `continuing`:
 
 {% raw %}
 ```typescript
@@ -157,26 +164,26 @@ const outcome = yield* steps.attempt({
 
 ## 5.3 The Loop Continues
 
-For example, in **#15 → Response → Raw response**, the model asks OpenCode to run the tests with the `shell` tool:
+For example, in [#15]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/15){:target="_blank" rel="noopener"} **→ Response → Raw response**, the model asks OpenCode to run the tests with the `shell` tool:
 
 [![#15 Raw response: shell call and test command]({{ '/assets/lab-02/15.png' | relative_url }})]({{ '/assets/lab-02/15.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-The command reports that `pytest` is missing. OpenCode includes that result in #16 Request, and the model asks it to install `pytest` and retry. The retry reports `2 failed, 5 passed`, so in #17 the model asks for fixes. It requests another test run and PDF processing in #18, then output checks in #19.
+The command reports that `pytest` is missing. OpenCode includes that result in #16 Request, and the model asks it to install `pytest` and retry. The retry reports `2 failed, 5 passed`, so in #17 the model asks for fixes. In #18 it asks OpenCode to rerun the tests and process the PDFs.
 
 ## 5.4 Why OpenCode Stops After #20
 {: #why-opencode-stops-after-20}
 
-In **#19 Response**, the model requests the `shell` tool to check the output. OpenCode runs the check and sends its result in **#20 Request**. This time the terminal shows a report. Why is there no #21?
+In [#19]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/19){:target="_blank" rel="noopener"} **→ Response**, the model requests the `shell` tool to check the output. OpenCode runs the check and sends its result in [#20]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/20){:target="_blank" rel="noopener"} **→ Request**. The terminal then shows the report and waits for your next prompt. Why is there no #21?
 
 [![Terminal: the report's final “Files created” line]({{ '/assets/lab-02/19.png' | relative_url }})]({{ '/assets/lab-02/19.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Compare the full replies: #14 requested two writes in `delta.tool_calls`; **#20 → Response → Raw response** contains no tool calls. The screenshot below shows just the end of #20's report. OpenCode [appends the `delta.content` fragments as they arrive](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L451); the highlighted text forms the “Files created” line above. The last highlight shows `finish_reason: "stop"` instead of `"tool_calls"`: it describes how the reply ended, not whether OpenCode will call the model again.
+Here is the end of [#20]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/20){:target="_blank" rel="noopener"} **→ Response → Raw response**:
 
 [![#20 Raw response: report text highlighted, with finish_reason stop marked separately]({{ '/assets/lab-02/18-highlighted.png' | relative_url }})]({{ '/assets/lab-02/18-highlighted.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-After #14, OpenCode had two write results to send back, so `continuing` was true and it started #15. After #20, there is no new tool call, so `runStep()` returns `false`. With no pending user input and `force` already reset to `false`, the [check in Section 5.2](#loop-exit-check) returns `Complete` instead of `Ready`. OpenCode does not start #21.
+The red boxes show how the terminal line was built: one `delta.content` value contains `chunk_pdf`, and the next continues with `s.py`. OpenCode [joins the text in order](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L451), so you see `chunk_pdfs.py` in the report.
 
-One user prompt was enough: the model chose what to do next, and OpenCode's **agent harness** ran the tools, sent back their results, and stopped calling the model after #20.
+The full #20 response contains no tool calls ([diagram step 5B]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }})). Its `finish_reason` is `"stop"` rather than `"tool_calls"` as in [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}. With no tool call to follow up, `runStep()` returns `false`. No user input is pending and `force` is already `false`, so the [check in Section 5.2](#loop-exit-check) returns `Complete`. OpenCode does not start #21.
 
 ## References
 
@@ -199,8 +206,6 @@ One user prompt was enough: the model chose what to do next, and OpenCode's **ag
 - [Tool results in model messages](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/to-llm-message.ts)
 
 - [Tool activity and continuation](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L649)
-
-Source links are pinned to the OpenCode version used in this lab.
 
 ---
 

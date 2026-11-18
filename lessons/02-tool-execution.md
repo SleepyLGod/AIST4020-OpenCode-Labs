@@ -12,16 +12,16 @@ OpenCode has sent the request. In #14, the model asks it to write two files. We 
 
 ## 4.1 Read the Model's Response
 
-Open **#14 → Response → Raw response → RESPONSE BODY**. The model asks for two writes and gives the filename and code for each (boxes 2 and 3). NVIDIA's API sends those calls to OpenCode in the numbered `data:` blocks:
+Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Response → Raw response → RESPONSE BODY**. The numbered `data:` blocks use the Chat Completions streaming format. In boxes 2 and 3, the model requests two writes and gives the filename and code for each:
 
 [![#14 Response body with six numbered parts and two tool calls outlined; long Python code omitted]({{ '/assets/lab-02/response14-full-numbered.png' | relative_url }})]({{ '/assets/lab-02/response14-full-numbered.png' | relative_url }}){:target="_blank" rel="noopener"}
 
 1. **The model's role.** Inside `choices[0].delta`, `role` is `assistant`.
-2. **Write `chunk_pdfs.py`.** `function.name` is `write`. Its `function.arguments` string contains `path` and `content`: the filename and Python code to write. The outer `delta.content` is ordinary reply text, empty here; it is not the file content.
+2. **Write `chunk_pdfs.py`.** Here, `function.name` is `write`. Its `function.arguments` string contains `path` and `content`: the filename and Python code to write. The outer `delta.content` is ordinary reply text, empty here; it is not the file content.
 3. **Write `test_chunk_pdfs.py`.** The second call uses the same tool, with a different `path` and `content`.
-4. **How this reply ended.** NVIDIA's API sets `finish_reason: "tool_calls"` because the model requested tools. This field is not part of the model's text.
+4. **Finish reason.** The API reports `finish_reason: "tool_calls"` because the model requested tools.
 5. **Token usage.** `usage` reports token counts.
-6. **End of this response.** `[DONE]` marks the end of NVIDIA's response stream for #14. OpenCode can start a write as soon as it receives the tool call; it waits for both results before sending #15.
+6. **`[DONE]`** marks the end of the response stream for #14.
 
 ## 4.2 Find and Run the Tool
 
