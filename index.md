@@ -12,3 +12,7 @@ build a PDF processing tool; later labs will explain how the features work.
 [Lab 1: Getting Started with OpenCode]({{ '/lessons/getting-started/' | relative_url }})
 
 Install OpenCode, connect a model, and build a project through conversation.
+
+[Lab 2: Harness Engineering Overview]({{ '/lessons/harness-engineering/' | relative_url }})
+
+Follow the PDF task's trace and source code to see how OpenCode keeps working after one prompt.

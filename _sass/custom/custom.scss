@@ -2,6 +2,32 @@
 .main-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .main-content img { max-width: 100%; height: auto; }
 
+.harness-diagram-link {
+  display: block;
+  cursor: zoom-in;
+}
+
+.harness-diagram {
+  display: block;
+  width: 100%;
+  aspect-ratio: 10 / 9;
+  border: 0;
+  pointer-events: none;
+}
+
+.trace-dashboard {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  min-height: 540px;
+  border: 1px solid #ddd;
+}
+
+.main-content details {
+  margin: 1rem 0;
+  summary { cursor: pointer; font-weight: 600; }
+}
+
 // Connection dialogs form a pair on desktop and a sequence on narrow screens.
 .main-content .connection-screens {
   display: grid;
