@@ -1,3 +1,33 @@
+// Increase lesson text without scaling layout dimensions or code.
+$lesson-font-size-increase: 0.5pt;
+
+body .main-content {
+  font-size: calc(1rem + $lesson-font-size-increase);
+
+  code { font-size: 0.75rem; }
+  h1 { font-size: calc(2rem + $lesson-font-size-increase) !important; }
+  h2 { font-size: calc(1.125rem + $lesson-font-size-increase) !important; }
+  h3 { font-size: calc(1rem + $lesson-font-size-increase) !important; }
+}
+
+body .site-title { font-size: calc(1.125rem + $lesson-font-size-increase) !important; }
+body .nav-list .nav-list-item {
+  font-size: calc(0.875rem + $lesson-font-size-increase) !important;
+}
+
+@media (min-width: 31.25rem) {
+  body .main-content h1 { font-size: calc(2.25rem + $lesson-font-size-increase) !important; }
+  body .main-content h2, body .site-title {
+    font-size: calc(1.5rem + $lesson-font-size-increase) !important;
+  }
+  body .main-content h3 { font-size: calc(1.125rem + $lesson-font-size-increase) !important; }
+  body .nav-list .nav-list-item { font-size: calc(1rem + $lesson-font-size-increase) !important; }
+}
+
+@media (min-width: 50rem) {
+  body .nav-list .nav-list-item { font-size: calc(0.875rem + $lesson-font-size-increase) !important; }
+}
+
 // Keep long prompts readable without horizontal scrolling on a phone.
 .main-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .main-content img { max-width: 100%; height: auto; }
@@ -29,8 +59,8 @@
   }
 
   .lesson-navigation__next { grid-column: 2; text-align: right; }
-  .lesson-navigation__label { color: $body-text-color; font-size: 0.875rem; }
-  .lesson-navigation__title { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+  .lesson-navigation__label { color: $body-text-color; font-size: calc(0.875rem + $lesson-font-size-increase); }
+  .lesson-navigation__title { font-size: calc(1rem + $lesson-font-size-increase); font-weight: 600; line-height: 1.5; }
 }
 
 @media (max-width: 40rem) {

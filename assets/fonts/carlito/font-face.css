@@ -1,0 +1,32 @@
+/* Carlito v4 Latin webfonts from Google Fonts; see OFL.txt. */
+@font-face {
+  font-family: Carlito;
+  src: url("carlito-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Carlito;
+  src: url("carlito-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Carlito;
+  src: url("carlito-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Carlito;
+  src: url("carlito-bold-italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
