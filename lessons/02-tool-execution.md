@@ -65,7 +65,7 @@ restore(executeTool(event)).pipe(
 ```
 {% endraw %}
 
-This is a tool call, and the model service has not marked it as already executed (`providerExecuted`), so OpenCode calls `executeTool(event)`. The early `return` would skip only this event.
+This is a tool call, and the model service has not marked it as already executed (`providerExecuted`), so OpenCode calls `executeTool(event)`.
 
 That function [passes the call](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/model-request.ts#L390) to [`packages/core/src/tool.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool.ts#L313). There, `direct.get(name)` looks up the implementation registered as `write`:
 

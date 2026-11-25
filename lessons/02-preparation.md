@@ -12,8 +12,6 @@ permalink: /lessons/harness-engineering/preparation/
 
 We will use a course-adapted version of the open-source [opencode-trace](https://github.com/aixmoyu/opencode-trace). It automatically records OpenCode's requests to the model and the model's responses, and provides a browser dashboard for inspecting them.
 
-The walkthrough uses the provided [Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }}); record numbers in your own run may differ.
-
 **Check the environment.** Use OpenCode 2.2.0 from Lab 1. Run `node --version`; [install or update Node.js](https://nodejs.org/en/download) only if it is missing or below version 22.
 
 **Install the tracer in a fresh Lab 1 project.** Download and unzip the [Lab 1 project]({{ '/downloads/opencode-lab1.zip' | relative_url }}) into a new folder. Place the [**tracer installer**]({{ '/downloads/opencode-tracer-0.1.1.tgz' | relative_url }}) inside **opencode-lab1/**, then open a terminal there and run:
@@ -24,7 +22,7 @@ npx --yes --package ./opencode-tracer-0.1.1.tgz opencode-tracer install .
 ```
 {% endraw %}
 
-**Open OpenCode and the dashboard.** Create **AGENTS.md** as in Lab 1 Section 2, then restart OpenCode:
+**Open OpenCode and the dashboard.** Create **AGENTS.md** as in Lab 1 Section 2, then (re)start OpenCode:
 
 {% raw %}
 ```sh
@@ -44,9 +42,9 @@ Open [**http://127.0.0.1:3218**](http://127.0.0.1:3218).
 
 **Repeat the project workflow.** In a new session, follow Lab 1 Sections 2 and 3, from Skill installation through Plan and Build. The tracer saves model requests and responses in **.opencode-trace/** and displays them in the dashboard.
 
-> P.S., Press **Ctrl+C** in that terminal to stop the dashboard. More options: [Tracer usage guide]({{ '/downloads/opencode-tracer-usage.md' | relative_url }}).
+> When you finish inspecting the trace, press **Ctrl+C** in that terminal to stop the dashboard. More options: [Tracer usage guide]({{ '/downloads/opencode-tracer-usage.md' | relative_url }}).
 
-We also provide the trace from the same run shown in the opening screenshot. Open [Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }}){:target="_blank" rel="noopener"} and select the session:
+The following sections use the trace from the run shown in the opening screenshot; your own record numbers may differ. Open [Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }}){:target="_blank" rel="noopener"} and select the session:
 
 [![PDF task demo trace overview]({{ '/assets/lab-02/02.png' | relative_url }})]({{ '/assets/lab-02/02.png' | relative_url }}){:target="_blank" rel="noopener"}
 

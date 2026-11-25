@@ -20,6 +20,6 @@ OpenCode sends requests to the model, executes the requested tools, and includes
 
 The software around the model that organizes this work is the **agent harness**. Designing how these parts work together is **harness engineering**.
 
-We will now follow the first cycle, from your implementation prompt through the model's reply and OpenCode's file writes, to the next model call.
+We will now follow #14, from the implementation prompt through the model's response and OpenCode's file writes, to the next request, #15.
 
 {% include lesson-navigation.html previous_url="/lessons/harness-engineering/preparation/" previous_title="Preparation" next_url="/lessons/harness-engineering/model-request/" next_title="Preparing the Model Request" %}
