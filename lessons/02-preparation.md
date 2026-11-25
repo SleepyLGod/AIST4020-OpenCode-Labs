@@ -12,6 +12,8 @@ permalink: /lessons/harness-engineering/preparation/
 
 We will use a course-adapted version of the open-source [opencode-trace](https://github.com/aixmoyu/opencode-trace). It automatically records OpenCode's requests to the model and the model's responses, and provides a browser dashboard for inspecting them.
 
+The walkthrough uses the provided [Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }}); record numbers in your own run may differ.
+
 **Check the environment.** Use OpenCode 2.2.0 from Lab 1. Run `node --version`; [install or update Node.js](https://nodejs.org/en/download) only if it is missing or below version 22.
 
 **Install the tracer in a fresh Lab 1 project.** Download and unzip the [Lab 1 project]({{ '/downloads/opencode-lab1.zip' | relative_url }}) into a new folder. Place the [**tracer installer**]({{ '/downloads/opencode-tracer-0.1.1.tgz' | relative_url }}) inside **opencode-lab1/**, then open a terminal there and run:
@@ -48,7 +50,7 @@ We also provide the trace from the same run shown in the opening screenshot. Ope
 
 [![PDF task demo trace overview]({{ '/assets/lab-02/02.png' | relative_url }})]({{ '/assets/lab-02/02.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Each trace entry records **one model call**: OpenCode's request and the model's response. The numbers below refer to the demo:
+Each trace entry records **one model call**: OpenCode's request and the model's response.
 
 - **#1:** Generate the session title: "Install PDF extraction skill for OpenCode".
 

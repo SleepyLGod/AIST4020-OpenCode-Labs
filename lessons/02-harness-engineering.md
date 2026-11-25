@@ -30,4 +30,4 @@ We'll use the terminal, model-call trace, and OpenCode's source code to see how 
 4. [Executing the Model's Tool Calls]({{ '/lessons/harness-engineering/tool-execution/' | relative_url }})
 5. [When OpenCode Continues or Stops]({{ '/lessons/harness-engineering/feedback/' | relative_url }})
 
-[Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }})
+[Trace Demo]({{ '/lessons/harness-engineering/trace/' | relative_url }}): the recorded model requests and responses used in this walkthrough.

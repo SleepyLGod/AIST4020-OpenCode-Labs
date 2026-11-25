@@ -182,9 +182,9 @@ Here is the end of [#20]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#
 
 [![#20 Raw response: report text highlighted, with finish_reason stop marked separately]({{ '/assets/lab-02/18-highlighted.png' | relative_url }})]({{ '/assets/lab-02/18-highlighted.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-The red boxes show how the terminal line was built: one `delta.content` value contains `chunk_pdf`, and the next continues with `s.py`. OpenCode [joins the text in order](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L451), so you see `chunk_pdfs.py` in the report.
+The red boxes show how the terminal line was built: one `delta.content` value contains `chunk_pdf`, and the next continues with `s.py`. OpenCode [joins the text in order](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L451), so you see `chunk_pdfs.py` in the report. The final highlighted field is `finish_reason: "stop"`, rather than `"tool_calls"` as in [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}.
 
-The full #20 response contains no tool calls ([diagram step 5B]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }})). Its `finish_reason` is `"stop"` rather than `"tool_calls"` as in [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}. With no tool call to follow up, `runStep()` returns `false`. No user input is pending and `force` is already `false`, so the [check in Section 5.2](#loop-exit-check) returns `Complete`. OpenCode does not start #21.
+The full #20 response contains no tool calls ([diagram step 5B]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }})), so `runStep()` returns `false`. No user input is pending and `force` is already `false`, so the [check in Section 5.2](#loop-exit-check) returns `Complete`. OpenCode does not start #21.
 
 ## References
 
