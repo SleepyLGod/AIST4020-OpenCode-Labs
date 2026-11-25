@@ -8,13 +8,13 @@ permalink: /lessons/harness-engineering/tool-execution/
 
 # 4. Executing the Model's Tool Calls
 
-OpenCode has sent the request. In #14, the model asks it to write two files. We will follow OpenCode's tool-execution behavior in [diagram step 5A]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }}), from receiving these calls to writing the files.
+<span id="41-read-the-models-response"></span>
 
-## 4.1 Read the Model's Response
-
-Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Response → Raw response → RESPONSE BODY**. The numbered `data:` blocks use the Chat Completions streaming format. In boxes 2 and 3, the model requests two writes and gives the filename and code for each:
+OpenCode has sent the request. To see the model's response, open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Response → Raw response → RESPONSE BODY**:
 
 [![#14 Response body with six numbered parts and two tool calls outlined; long Python code omitted]({{ '/assets/lab-02/response14-full-numbered.png' | relative_url }})]({{ '/assets/lab-02/response14-full-numbered.png' | relative_url }}){:target="_blank" rel="noopener"}
+
+The numbered `data:` blocks use the Chat Completions streaming format:
 
 1. **The model's role.** Inside `choices[0].delta`, `role` is `assistant`.
 2. **Write `chunk_pdfs.py`.** Here, `function.name` is `write`. Its `function.arguments` string contains `path` and `content`: the filename and Python code to write. The outer `delta.content` is ordinary reply text, empty here; it is not the file content.
@@ -23,7 +23,11 @@ Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e
 5. **Token usage.** `usage` reports token counts.
 6. **`[DONE]`** marks the end of the response stream for #14.
 
-## 4.2 Find and Run the Tool
+Next, we will follow how OpenCode executes these tool calls in [diagram step 5A]({{ '/lessons/harness-engineering/overview/#harness-flow' | relative_url }}).
+
+<span id="42-find-and-run-the-tool"></span>
+
+## 4.1 Find and Run the Tool
 
 OpenCode reads the tool name and arguments from the response, finds the matching tool, checks its inputs, and calls its implementation.
 
@@ -86,13 +90,15 @@ const result = yield* tool.execute(decoded, context).pipe(
 
 Here, `input` comes from `event.input`. `decodeInput` checks `path` and `content` against the input requirements in the [tool definition we saw in Section 3]({{ '/lessons/harness-engineering/model-request/#34-tool-definitions' | relative_url }}). After validation, `tool.execute` calls the `write` tool's execution function in [`packages/core/src/tool/plugin/write.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L55), passing `decoded` as that function's `input`.
 
-## 4.3 Approval, File Write, and Result
+<span id="43-approval-file-write-and-result"></span>
+
+## 4.2 Approval, File Write, and Result
 
 Before creating `chunk_pdfs.py`, OpenCode asks for approval:
 
 [![CLI: approval before writing chunk\_pdfs.py]({{ '/assets/lab-02/11.png' | relative_url }})]({{ '/assets/lab-02/11.png' | relative_url }}){:target="_blank" rel="noopener"}
 
-Inside that execution function, [`packages/core/src/tool/plugin/write.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L71) resolves the supplied path, checks permission, and then writes the supplied content:
+The `write` tool's execution function in [`packages/core/src/tool/plugin/write.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L71) resolves the supplied path, checks permission, and writes the content:
 
 {% raw %}
 ```typescript
@@ -109,15 +115,7 @@ const result = yield* fileMutation.writeTextPreservingBom({ target, content: inp
 
 Here, `input.path` is `chunk_pdfs.py`; resolving it gives the file location in `target`. The `edit` permission check triggers the **Edit** approval shown above. Once approved, the write function saves the model's Python code (`input.content`) to that file.
 
-The write operation returns `result`, including the file path and whether it already existed. The [following callback](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L94) receives it as `output`:
-
-{% raw %}
-```typescript
-Effect.map((output) => ({ output, content: toModelContent(output) })),
-```
-{% endraw %}
-
-`toModelContent(output)` in the [same file](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L39) turns that result into text for the model:
+After the write, OpenCode [passes the file path and whether the file already existed](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L94) to [`toModelContent()`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/tool/plugin/write.ts#L39), which produces the result text for the model:
 
 {% raw %}
 ```typescript
@@ -126,7 +124,7 @@ export const toModelContent = (output: Output) =>
 ```
 {% endraw %}
 
-The new file produces `Created file successfully: chunk_pdfs.py`; the second write produces the corresponding result for `test_chunk_pdfs.py`. Next, we will see how OpenCode includes these results in another model request.
+For this new file, the tool returns "`Created file successfully: chunk_pdfs.py`". The next section follows these write results into #15 Request.
 
 ---
 

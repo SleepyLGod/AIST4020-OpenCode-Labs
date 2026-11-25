@@ -8,7 +8,7 @@ permalink: /lessons/harness-engineering/overview/
 
 # 2. The Agent Harness: An Overview
 
-The diagram below shows how OpenCode organizes the work seen in the [opening terminal screenshot]({{ '/lessons/harness-engineering/#implementation-screenshot' | relative_url }}). You provide the task; OpenCode coordinates the repeated model calls and tool execution that follow.
+The diagram below shows how OpenCode organizes the work seen in the [opening terminal screenshot]({{ '/lessons/harness-engineering/#implementation-screenshot' | relative_url }}).
 
 <div markdown="0">
   <a id="harness-flow" class="harness-diagram-link" href="{{ '/assets/lab-02/diagram.html' | relative_url }}" target="_blank" rel="noopener" aria-label="Open flow diagram in a new tab">

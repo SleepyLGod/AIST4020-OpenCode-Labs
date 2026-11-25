@@ -1,0 +1,7 @@
+<div class="trace15-numbered" style="position: relative; line-height: 0; margin: 0;">
+  <img src="{{ '/assets/lab-02/15-request-paired.png' | relative_url }}" width="1264" height="967" style="display: block; width: 100%; height: auto;" alt="#15 Raw request: 1 is the assistant message with both write calls; 2 and 3 are their tool results. A and B match each call ID to its result.">
+  {% assign role_positions = '27.40,79.73,91.11' | split: ',' %}
+  {% for position in role_positions %}
+  <span aria-hidden="true" style="position: absolute; left: 12.34%; top: {{ position }}%; transform: translate(-50%, -50%); display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #ffe08a; color: #1f1c1c; font: 700 13px/1 Arial, sans-serif; letter-spacing: 0;">{{ forloop.index }}</span>
+  {% endfor %}
+</div>

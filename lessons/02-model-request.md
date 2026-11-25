@@ -15,7 +15,7 @@ Open [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e
 
 ## 3.1 Instructions
 
-The first object in the `messages` array has `role: "system"`. Its `content` field contains OpenCode's system prompts for instructions, our project instructions from `AGENTS.md`, and run information:
+The first object in the `messages` array has `role: "system"`. Its `content` field contains OpenCode's instructions, our project instructions from `AGENTS.md`, and run information:
 
 [![#14 Raw request: system role and the beginning of its content]({{ '/assets/lab-02/14-system-message.png' | relative_url }})]({{ '/assets/lab-02/14-system-message.png' | relative_url }}){:target="_blank" rel="noopener"}
 

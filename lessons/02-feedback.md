@@ -8,25 +8,26 @@ permalink: /lessons/harness-engineering/feedback/
 
 # 5. When OpenCode Continues or Stops
 
-After writing both files, OpenCode sends the results to the model without waiting for another user prompt. What makes it start #15, and why does it stop after #20?
+After writing both files, OpenCode sends their results in [**#15 Request**]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/15){:target="_blank" rel="noopener"} without waiting for another user prompt. The loop stops after #20. How does OpenCode prepare the next request, and decide whether to continue?
 
-## 5.1 Add Tool Results to the Next Request
+First, look at OpenCode's next request: [**#15 → Request → Raw request → REQUEST BODY**]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/15){:target="_blank" rel="noopener"}. In [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}, `messages` ended with your new user prompt. In #15, three entries follow those previous messages:
 
-After approval, the terminal shows both writes completed:
+<div markdown="0">
+  <a href="{{ '/assets/lab-02/15-request-numbered.html' | relative_url }}" target="_blank" rel="noopener" aria-label="Enlarge #15 request with numbered messages">
+    {% include trace15-numbered.html %}
+  </a>
+</div>
 
-[![CLI: chunk_pdfs.py written]({{ '/assets/lab-02/12.png' | relative_url }})]({{ '/assets/lab-02/12.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-[![CLI: test_chunk_pdfs.py written]({{ '/assets/lab-02/13.png' | relative_url }})]({{ '/assets/lab-02/13.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-In the request body for [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"}, `messages` ended with your prompt. Open [#15]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/15){:target="_blank" rel="noopener"} **→ Request → Raw request → REQUEST BODY**. The same 31 messages are followed by three more:
-
-[![#15 Raw request: A and B pair the write calls with their results]({{ '/assets/lab-02/15-request-paired.png' | relative_url }})]({{ '/assets/lab-02/15-request-paired.png' | relative_url }}){:target="_blank" rel="noopener"}
-
-1. `"role": "assistant"`: OpenCode includes the model's #14 reply. Its `tool_calls` array contains both requests: write `chunk_pdfs.py` (**A**) and write `test_chunk_pdfs.py` (**B**).
+1. `"role": "assistant"`: OpenCode includes the model's #14 reply. Its `tool_calls` array contains both tool calls: write `chunk_pdfs.py` (**A**) and write `test_chunk_pdfs.py` (**B**).
 2. `"role": "tool"`: OpenCode reports `Created file successfully: chunk_pdfs.py` in `content`. Its `tool_call_id` matches the first call's `id` (**A**).
 3. `"role": "tool"`: OpenCode reports `Created file successfully: test_chunk_pdfs.py`. Its `tool_call_id` matches the second call's `id` (**B**).
 
-After each write, [`packages/core/src/session/message-updater.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/message-updater.ts#L345) saves the result in the record for that call. When preparing #15, [`toolResult()` in `packages/core/src/session/runner/to-llm-message.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/to-llm-message.ts#L127) receives that record as `tool`. It takes the result from `tool.state.content` and the call ID from `tool.id`:
+## 5.1 Save Results and Build Messages
+{: #51-add-tool-results-to-the-next-request}
+
+These entries come from OpenCode's saved calls and results. After each write, [`packages/core/src/session/message-updater.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/message-updater.ts#L345) saves the result in the record for that call.
+
+When preparing #15, [`packages/core/src/session/runner/to-llm-message.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/to-llm-message.ts#L119) converts the saved calls with `toolCall()`. Its `toolResult()` function below reads each call's result: `tool` is the saved record, `tool.state.content` holds the result, and `tool.id` is the call ID:
 
 {% raw %}
 ```typescript
@@ -50,7 +51,7 @@ const toolResult = (tool: SessionMessage.AssistantTool, providerMetadata: Provid
 ```
 {% endraw %}
 
-With that ID and result text, [`packages/ai/src/protocols/openai-chat.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/ai/src/protocols/openai-chat.ts#L515) builds each `tool` message in #15. The ID becomes `tool_call_id`; the text becomes `content`:
+Next, [`packages/ai/src/protocols/openai-chat.ts`](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/ai/src/protocols/openai-chat.ts#L451) puts both calls in the `assistant` message's `tool_calls` array and builds a `tool` message for each result. Below, the call ID becomes `tool_call_id` and the result text becomes `content`:
 
 {% raw %}
 ```typescript
@@ -173,7 +174,7 @@ The command reports that `pytest` is missing. OpenCode includes that result in #
 ## 5.4 Why OpenCode Stops After #20
 {: #why-opencode-stops-after-20}
 
-In [#19]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/19){:target="_blank" rel="noopener"} **→ Response**, the model requests the `shell` tool to check the output. OpenCode runs the check and sends its result in [#20]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/20){:target="_blank" rel="noopener"} **→ Request**. The terminal then shows the report and waits for your next prompt. Why is there no #21?
+In [#19]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/19){:target="_blank" rel="noopener"} **→ Response**, the model requests the `shell` tool to check the output. OpenCode runs the check and sends its result in [#20]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/20){:target="_blank" rel="noopener"} **→ Request**. The model returns a report, which OpenCode displays in the terminal. Why is there no #21?
 
 [![Terminal: the report's final “Files created” line]({{ '/assets/lab-02/19.png' | relative_url }})]({{ '/assets/lab-02/19.png' | relative_url }}){:target="_blank" rel="noopener"}
 
