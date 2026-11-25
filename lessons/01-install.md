@@ -78,6 +78,4 @@ OpenCode may reply like this:
 
 [![An earlier first conversation with OpenCode using NVIDIA]({{ '/assets/lab-01/opencode-hello.png' | relative_url }})]({{ '/assets/lab-01/opencode-hello.png' | relative_url }}){:target="_blank" rel="noopener"}
 
----
-
-[Next: Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/getting-started/" previous_title="Lab 1 Overview" next_url="/lessons/getting-started/explore/" next_title="Prepare Your Project with OpenCode" %}

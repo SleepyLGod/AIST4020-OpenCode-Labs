@@ -86,6 +86,4 @@ You can also use `/new` to start a new session in the same project folder. It do
 - [Agent Skills overview and specification](https://agentskills.io/home)
 - PDF Extraction: [Skill listing](https://www.skills.sh/claude-office-skills/skills/pdf-extraction) and [source repository](https://github.com/claude-office-skills/skills)
 
----
-
-[Previous: Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }}) · [Lab 1]({{ '/lessons/getting-started/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/getting-started/explore/" previous_title="Prepare Your Project with OpenCode" next_url="/lessons/harness-engineering/" next_title="Lab 2: Harness Engineering Overview" %}

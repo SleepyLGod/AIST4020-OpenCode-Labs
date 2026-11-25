@@ -81,6 +81,4 @@ Lab 1 installed the OpenCode executable, not this source.
 
 </details>
 
----
-
-[Previous: Lab 2 Overview]({{ '/lessons/harness-engineering/' | relative_url }}) · [Next: The Agent Harness: An Overview]({{ '/lessons/harness-engineering/overview/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/harness-engineering/" previous_title="Lab 2 Overview" next_url="/lessons/harness-engineering/overview/" next_title="The Agent Harness: An Overview" %}

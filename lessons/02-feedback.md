@@ -208,6 +208,4 @@ The full #20 response contains no tool calls ([diagram step 5B]({{ '/lessons/har
 
 - [Tool activity and continuation](https://github.com/anomalyco/opencode/blob/1097e2668b1e08ad63bdf0b1c4860b9bc01e420c/packages/core/src/session/runner/publish-llm-event.ts#L649)
 
----
-
-[Previous: Executing the Model's Tool Calls]({{ '/lessons/harness-engineering/tool-execution/' | relative_url }}) · [Lab 2 Overview]({{ '/lessons/harness-engineering/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/harness-engineering/tool-execution/" previous_title="Executing the Model's Tool Calls" %}

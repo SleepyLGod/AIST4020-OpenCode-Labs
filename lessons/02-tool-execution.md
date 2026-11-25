@@ -126,6 +126,4 @@ export const toModelContent = (output: Output) =>
 
 For this new file, the tool returns "`Created file successfully: chunk_pdfs.py`". The next section follows these write results into #15 Request.
 
----
-
-[Previous: Preparing the Model Request]({{ '/lessons/harness-engineering/model-request/' | relative_url }}) · [Next: When OpenCode Continues or Stops]({{ '/lessons/harness-engineering/feedback/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/harness-engineering/model-request/" previous_title="Preparing the Model Request" next_url="/lessons/harness-engineering/feedback/" next_title="When OpenCode Continues or Stops" %}

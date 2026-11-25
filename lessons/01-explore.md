@@ -100,6 +100,4 @@ Get-Content .agents/skills/pdf-extraction/SKILL.md
 
 This Skill consists of a single file, **SKILL.md**.
 
----
-
-[Previous: Set Up OpenCode]({{ '/lessons/getting-started/install/' | relative_url }}) · [Next: Build with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/getting-started/install/" previous_title="Set Up OpenCode" next_url="/lessons/getting-started/build/" next_title="Build with OpenCode" %}

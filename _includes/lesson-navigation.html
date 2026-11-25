@@ -1,0 +1,14 @@
+<nav class="lesson-navigation" aria-label="Lesson navigation" markdown="0">
+  {% if include.previous_url %}
+  <a class="lesson-navigation__previous" href="{{ include.previous_url | relative_url }}">
+    <span class="lesson-navigation__label"><span aria-hidden="true">&#8592;</span> Previous</span>
+    <span class="lesson-navigation__title">{{ include.previous_title | escape }}</span>
+  </a>
+  {% endif %}
+  {% if include.next_url %}
+  <a class="lesson-navigation__next" href="{{ include.next_url | relative_url }}">
+    <span class="lesson-navigation__label">Next <span aria-hidden="true">&#8594;</span></span>
+    <span class="lesson-navigation__title">{{ include.next_title | escape }}</span>
+  </a>
+  {% endif %}
+</nav>

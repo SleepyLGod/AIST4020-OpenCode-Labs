@@ -22,6 +22,4 @@ The software around the model that organizes this work is the **agent harness**.
 
 We will now follow the first cycle, from your implementation prompt through the model's reply and OpenCode's file writes, to the next model call.
 
----
-
-[Previous: Preparation]({{ '/lessons/harness-engineering/preparation/' | relative_url }}) · [Next: Preparing the Model Request]({{ '/lessons/harness-engineering/model-request/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/harness-engineering/preparation/" previous_title="Preparation" next_url="/lessons/harness-engineering/model-request/" next_title="Preparing the Model Request" %}

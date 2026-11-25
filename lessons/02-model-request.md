@@ -225,6 +225,4 @@ const providerStream = llm.stream(input.prepared.request, input.prepared.options
 
 Next, we inspect what the model returns in [#14]({{ '/downloads/lab1-trace-demo.html' | relative_url }}#/session/ses_e3b26034dffevfCDf3plyBVSPC/record/14){:target="_blank" rel="noopener"} **→ Response**.
 
----
-
-[Previous: The Agent Harness: An Overview]({{ '/lessons/harness-engineering/overview/' | relative_url }}) · [Next: Executing the Model's Tool Calls]({{ '/lessons/harness-engineering/tool-execution/' | relative_url }})
+{% include lesson-navigation.html previous_url="/lessons/harness-engineering/overview/" previous_title="The Agent Harness: An Overview" next_url="/lessons/harness-engineering/tool-execution/" next_title="Executing the Model's Tool Calls" %}

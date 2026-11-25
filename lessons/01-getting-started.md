@@ -17,3 +17,5 @@ Later labs will explain the concepts and engineering behind the features we use 
 1. [Set Up OpenCode]({{ '/lessons/getting-started/install/' | relative_url }})
 2. [Prepare Your Project with OpenCode]({{ '/lessons/getting-started/explore/' | relative_url }})
 3. [Build with OpenCode]({{ '/lessons/getting-started/build/' | relative_url }})
+
+{% include lesson-navigation.html next_url="/lessons/getting-started/install/" next_title="Set Up OpenCode" %}

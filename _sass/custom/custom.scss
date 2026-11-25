@@ -2,6 +2,46 @@
 .main-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .main-content img { max-width: 100%; height: auto; }
 
+.main-content .lesson-navigation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid $border-color;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    min-width: 0;
+    min-height: 5rem;
+    padding: 0.75rem;
+    border-bottom: 0;
+    background-image: none;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+
+    &:hover { background-color: $sidebar-color; }
+    &:focus-visible { outline: 2px solid $link-color; outline-offset: 2px; }
+    &:hover .lesson-navigation__title { text-decoration: underline; }
+  }
+
+  .lesson-navigation__next { grid-column: 2; text-align: right; }
+  .lesson-navigation__label { color: $body-text-color; font-size: 0.875rem; }
+  .lesson-navigation__title { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+}
+
+@media (max-width: 40rem) {
+  .main-content .lesson-navigation {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+
+    .lesson-navigation__next { grid-column: 1; text-align: left; }
+  }
+}
+
 .harness-diagram-link {
   display: block;
   cursor: zoom-in;
